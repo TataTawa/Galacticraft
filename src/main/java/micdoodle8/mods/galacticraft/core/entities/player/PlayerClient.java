@@ -41,8 +41,8 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 public class PlayerClient implements IPlayerClient
 {
     private boolean saveSneak;
-	private double downMot2;
-	public static boolean startup;
+    private double downMot2;
+    public static boolean startup;
 
     @Override
     public void move(EntityPlayerSP player, MoverType type, double x, double y, double z)
@@ -151,30 +151,30 @@ public class PlayerClient implements IPlayerClient
             }
             else
             {
-		    	if (stats.isInFreefallLast() && this.downMot2 < -0.008D)
+            	if (stats.isInFreefallLast() && this.downMot2 < -0.008D)
                 {
-		    		stats.setLandingTicks(5 - (int)(Math.min(this.downMot2, stats.getDownMotionLast()) * 40));
-		    		if (stats.getLandingTicks() > stats.getMaxLandingticks())
-		    		{
-	                    if (stats.getLandingTicks() > stats.getMaxLandingticks() + 4)
-	                    {
-	                        stats.getFreefallHandler().pjumpticks = stats.getLandingTicks() - stats.getMaxLandingticks() - 5;
+            		stats.setLandingTicks(5 - (int)(Math.min(this.downMot2, stats.getDownMotionLast()) * 40));
+            		if (stats.getLandingTicks() > stats.getMaxLandingticks())
+            		{
+                        if (stats.getLandingTicks() > stats.getMaxLandingticks() + 4)
+                        {
+                            stats.getFreefallHandler().pjumpticks = stats.getLandingTicks() - stats.getMaxLandingticks() - 5;
                         }
-		    		    stats.setLandingTicks(stats.getMaxLandingticks());
-		    		}
-		    		float dYmax = 0.3F * stats.getLandingTicks() / stats.getMaxLandingticks();
-		    		float factor = 1F;
-		    		for (int i = 0; i <= stats.getLandingTicks(); i++)
-		    		{
+            		    stats.setLandingTicks(stats.getMaxLandingticks());
+            		}
+            		float dYmax = 0.3F * stats.getLandingTicks() / stats.getMaxLandingticks();
+            		float factor = 1F;
+            		for (int i = 0; i <= stats.getLandingTicks(); i++)
+            		{
     	                stats.getLandingYOffset()[i] = dYmax * MathHelper.sin(i * 3.1415926F / stats.getLandingTicks()) * factor;
     	                factor *= 0.97F;
                     }
-		    	}
-	        }
+            	}
+            }
 
-	        if (stats.getLandingTicks() > 0)
-	        {
-	            stats.setLandingTicks(stats.getLandingTicks() - 1);
+            if (stats.getLandingTicks() > 0)
+            {
+                stats.setLandingTicks(stats.getLandingTicks() - 1);
                 player.limbSwing *= 0.8F;
                 player.limbSwingAmount = 0F;
             }
@@ -206,8 +206,8 @@ public class PlayerClient implements IPlayerClient
         {
         	if(!ConfigManagerCore.disableVehicleCameraChanges)
             {
-	            stats.setLastZoomed(false);
-	            TickHandlerClient.zoom(4.0F);
+                stats.setLastZoomed(false);
+                TickHandlerClient.zoom(4.0F);
             }
         }
 

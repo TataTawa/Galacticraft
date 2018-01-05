@@ -398,7 +398,7 @@ public class FluidUtil
         }
     }
 
-	/**
+    /**
      * Tests for any type of container with some space in it
      * It can be either an empty container, or a Galacticraft canister
      * of the appropriate type, either empty or at least with some capacity remaining
@@ -494,7 +494,7 @@ public class FluidUtil
             }
         }
         return 0;
-	}
+    }
 
     /**
      * @param fs1 First FluidStack to compare
@@ -629,8 +629,8 @@ public class FluidUtil
     }
 
 
-	public static FluidStack getFluidContained(ItemStack container)
-	{
+    public static FluidStack getFluidContained(ItemStack container)
+    {
         if (container == null)
         {
             return null;
@@ -648,8 +648,8 @@ public class FluidUtil
         }
 
         return net.minecraftforge.fluids.FluidUtil.getFluidContained(container);
-	}
-	
+    }
+    
     /**
      * Test for any container type at all
      * Used, for example, in isItemValidForSlot() logic
@@ -743,7 +743,7 @@ public class FluidUtil
 
     @Nonnull
     public static FluidActionResult interactWithFluidHandler(@Nonnull ItemStack container, IFluidHandler fluidHandler, EntityPlayer player)
-	{
+    {
         if (container.isEmpty() || fluidHandler == null || player == null)
         {
             return FluidActionResult.FAILURE;

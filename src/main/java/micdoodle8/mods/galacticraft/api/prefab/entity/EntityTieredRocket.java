@@ -192,8 +192,8 @@ public abstract class EntityTieredRocket extends EntityAutoRocket implements IRo
                     //mcserver can be null if client switches to a LAN server
                     if (mcserver != null)
                     {
-	                	BlockVec3 coords = this.preGenIterator.next();
-	                    World w = mcserver.worldServerForDimension(coords.y);
+                    	BlockVec3 coords = this.preGenIterator.next();
+                        World w = mcserver.worldServerForDimension(coords.y);
                         if (w != null)
                         {
                             w.getChunkFromChunkCoords(coords.x, coords.z);

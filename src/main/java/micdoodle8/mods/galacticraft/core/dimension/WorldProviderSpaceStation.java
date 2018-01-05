@@ -61,13 +61,13 @@ public abstract class WorldProviderSpaceStation extends WorldProviderSpace
         super.updateWeather();
         spinManager.updateSpin();
     }
-	
-	@SideOnly(Side.CLIENT)
-	public abstract void setSpinDeltaPerTick(float angle);
-	
+    
+    @SideOnly(Side.CLIENT)
+    public abstract void setSpinDeltaPerTick(float angle);
+    
     @SideOnly(Side.CLIENT)
     public abstract float getSkyRotation();
 
     @SideOnly(Side.CLIENT)
-	public abstract void createSkyProvider();
+    public abstract void createSkyProvider();
 }

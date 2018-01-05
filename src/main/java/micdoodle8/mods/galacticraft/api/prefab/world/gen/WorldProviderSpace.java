@@ -308,12 +308,12 @@ public abstract class WorldProviderSpace extends WorldProvider implements IGalac
      * But: returning 'false' will cause beds to explode in this dimension.
      * If you want beds NOT to explode, you can override this, like in WorldProviderMoon.
      */
-	@Override
-	public boolean canRespawnHere()
-	{
-		return false;
-	}
-	
+    @Override
+    public boolean canRespawnHere()
+    {
+        return false;
+    }
+    
     /**
      * Do NOT override this in your add-ons.
      * 

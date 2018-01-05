@@ -39,12 +39,12 @@ public class ConfigManagerCore
     public static boolean forceOverworldRespawn;
     public static boolean hardMode;
     public static boolean quickMode;
-	public static boolean challengeMode;
-	private static int challengeFlags;
-	public static boolean challengeRecipes;
-	public static boolean challengeMobDropsAndSpawning;
-	public static boolean challengeSpawnHandling;
-	public static boolean challengeAsteroidPopulation;
+    public static boolean challengeMode;
+    private static int challengeFlags;
+    public static boolean challengeRecipes;
+    public static boolean challengeMobDropsAndSpawning;
+    public static boolean challengeSpawnHandling;
+    public static boolean challengeAsteroidPopulation;
     public static boolean disableRocketsToOverworld;
     public static boolean disableSpaceStationCreation;
     public static boolean spaceStationsRequirePermission;
@@ -889,8 +889,8 @@ public class ConfigManagerCore
     		if (dataLast instanceof String)
     		{
     			ConfigManagerCore.detectableIDs = new String[sizeIDs];
-		    	for (int j = 0; j < sizeIDs; j++)
-		    	ConfigManagerCore.detectableIDs[j] = new String((String) configs.get(dataCount++));
+            	for (int j = 0; j < sizeIDs; j++)
+            	ConfigManagerCore.detectableIDs[j] = new String((String) configs.get(dataCount++));
     		}
     		else if (dataLast instanceof String[])
     		{

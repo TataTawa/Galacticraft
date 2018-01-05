@@ -92,7 +92,7 @@ public class MapGenVillageMoon extends MapGenStructure
     protected StructureStart getStructureStart(int par1, int par2)
     {
         GCLog.debug("Generating Moon Village at x" + par1 * 16 + " z" + par2 * 16);
-		return new StructureVillageStartMoon(this.world, this.rand, par1, par2, this.terrainType);
+        return new StructureVillageStartMoon(this.world, this.rand, par1, par2, this.terrainType);
     }
 
     @Override

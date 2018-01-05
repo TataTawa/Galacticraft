@@ -20,16 +20,16 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class CompatibilityManager
 {
-	public final static String modidIC2 = "ic2";
-	public final static String modidMekanism = "mekanism";
-	public final static String modidBuildcraft = "buildcraftcore";
+    public final static String modidIC2 = "ic2";
+    public final static String modidMekanism = "mekanism";
+    public final static String modidBuildcraft = "buildcraftcore";
     public final static String modBCraftTransport = "buildcrafttransport";
     	
     public static boolean PlayerAPILoaded = Loader.isModLoaded("PlayerAPI");
     public static boolean RenderPlayerAPILoaded = Loader.isModLoaded("RenderPlayerAPI");
 
     private static boolean modIc2Loaded = Loader.isModLoaded(modidIC2);
-	private static boolean modBCraftEnergyLoaded = Loader.isModLoaded("buildcraftenergy");
+    private static boolean modBCraftEnergyLoaded = Loader.isModLoaded("buildcraftenergy");
     private static boolean modBCraftTransportLoaded;
     private static boolean modGTLoaded;
     private static boolean modTELoaded = Loader.isModLoaded("thermalexpansion");
@@ -52,8 +52,8 @@ public class CompatibilityManager
     private static Method spongeOverride = null;
     public static Class classBCTransport;
     public static Class classBCTransportPipeTile;
-	public static Class classBOPWorldType = null;
-	public static Class classBOPws = null;
+    public static Class classBOPWorldType = null;
+    public static Class classBOPws = null;
     public static Class classBOPwcm = null;
     public static Class classIC2wrench = null;
     public static Class classIC2wrenchElectric = null;
@@ -65,7 +65,7 @@ public class CompatibilityManager
     public static Constructor constructorIC2cableTE = null;
     private static Method androidPlayerGet;
     private static Method androidPlayerIsAndroid;
-	
+    
     public static void checkForCompatibleMods()
     {
         if (Loader.isModLoaded("gregtech") || Loader.isModLoaded("gregtech_addon"))

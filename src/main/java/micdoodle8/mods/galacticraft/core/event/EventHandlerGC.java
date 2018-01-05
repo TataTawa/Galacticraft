@@ -380,7 +380,7 @@ public class EventHandlerGC
             return;
         }
         
-		if (event.getEntity().world.provider instanceof IZeroGDimension)
+        if (event.getEntity().world.provider instanceof IZeroGDimension)
         {
             if (((IZeroGDimension)event.getEntity().world.provider).inFreefall(event.getEntity()))
             {

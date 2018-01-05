@@ -257,13 +257,13 @@ public class TileEntityCoalGenerator extends TileBaseUniversalElectricalSource i
         return 0;
     }
 
-	/*
+    /*
     @Override
-	public float getRequest(EnumFacing direction)
-	{
-		return 0;
-	}
-	*/
+    public float getRequest(EnumFacing direction)
+    {
+        return 0;
+    }
+    */
 
     @Override
     public EnumSet<EnumFacing> getElectricalInputDirections()

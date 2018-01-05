@@ -157,7 +157,7 @@ public class TileEntityElectricIngotCompressor extends TileBaseElectricBlock imp
             {
                 if (this.stacks.get(slot).getCount() + resultItemStack.getCount() > 64)
                 {
-					resultItemStack.grow(this.stacks.get(slot).getCount() - 64);
+                    resultItemStack.grow(this.stacks.get(slot).getCount() - 64);
                     GCCoreUtil.spawnItem(this.world, this.getPos(), resultItemStack);
                     this.stacks.get(slot).setCount(64);
                 }

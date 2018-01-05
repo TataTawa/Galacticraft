@@ -333,7 +333,7 @@ public class BlockMulti extends BlockAdvanced implements IPartialSealableBlock, 
         {
             BlockPos mainBlockPosition = ((TileEntityMulti) tileEntity).mainBlockPosition;
 
-	        if (mainBlockPosition != null && !mainBlockPosition.equals(pos))
+            if (mainBlockPosition != null && !mainBlockPosition.equals(pos))
             {
                 IBlockState mainState = world.getBlockState(mainBlockPosition);
                 return mainState.getBlock().getBedDirection(mainState, world, mainBlockPosition);

@@ -115,13 +115,13 @@ public class RecipeManagerAsteroids
     		CompressorRecipes.addShapelessRecipe(new ItemStack(AsteroidsItems.basicItem, 1, 6), titaniumIngot, titaniumIngot);
     	else
     	{
-	        if (OreDictionary.getOres("ingotTitanium").size() > 0)
-	        {
-	            for (ItemStack stack : OreDictionary.getOres("ingotTitanium"))
-	            {
-	                CompressorRecipes.addShapelessRecipe(new ItemStack(AsteroidsItems.basicItem, 1, 6), stack, stack);
-	            }
-	        }
+            if (OreDictionary.getOres("ingotTitanium").size() > 0)
+            {
+                for (ItemStack stack : OreDictionary.getOres("ingotTitanium"))
+                {
+                    CompressorRecipes.addShapelessRecipe(new ItemStack(AsteroidsItems.basicItem, 1, 6), stack, stack);
+                }
+            }
     	}
 
         CompressorRecipes.addShapelessRecipe(platingTier3, new ItemStack(MarsItems.marsItemBasic, 1, 3), new ItemStack(MarsItems.marsItemBasic, 1, 5));

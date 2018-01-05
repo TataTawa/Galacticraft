@@ -491,11 +491,11 @@ public class EntityAstroMiner extends Entity implements IInventoryDefaults, IPac
                 }
                 else
                 {
-					if (this.playerMP != null && (this.givenFailMessage & (1 << FAIL_BASEDESTROYED)) == 0)
-					{
-	                    this.playerMP.sendMessage(new TextComponentString(GCCoreUtil.translate("gui.message.astro_miner" + FAIL_BASEDESTROYED + ".fail")));
-	                    this.givenFailMessage += (1 << FAIL_BASEDESTROYED);
-	                    //Continue mining even though base was destroyed - maybe it will be replaced
+                    if (this.playerMP != null && (this.givenFailMessage & (1 << FAIL_BASEDESTROYED)) == 0)
+                    {
+                        this.playerMP.sendMessage(new TextComponentString(GCCoreUtil.translate("gui.message.astro_miner" + FAIL_BASEDESTROYED + ".fail")));
+                        this.givenFailMessage += (1 << FAIL_BASEDESTROYED);
+                        //Continue mining even though base was destroyed - maybe it will be replaced
                     }
                 }
             }
@@ -1511,8 +1511,8 @@ public class EntityAstroMiner extends Entity implements IInventoryDefaults, IPac
         //Collect the mined block - unless it's a plant or leaves in which case just break it
         if (!(b instanceof IPlantable || b instanceof BlockLeaves))
         {
-		    ItemStack drops = gtFlag ? getGTDrops(this.world, pos, b) : getPickBlock(this.world, pos, b);
-		    if (drops != null && !this.addToInventory(drops))
+            ItemStack drops = gtFlag ? getGTDrops(this.world, pos, b) : getPickBlock(this.world, pos, b);
+            if (drops != null && !this.addToInventory(drops))
             {
                 //drop itemstack if AstroMiner can't hold it
                 dropStack(pos, drops);

@@ -6,23 +6,23 @@ import powercrystals.minefactoryreloaded.api.IMobSpawnHandler;
 
 public class MFRSpawnHandlerSlimeling implements IMobSpawnHandler
 {
-	@Override
-	public Class<? extends EntityLivingBase> getMobClass()
-	{
-		return EntitySlimeling.class;
-	}
+    @Override
+    public Class<? extends EntityLivingBase> getMobClass()
+    {
+        return EntitySlimeling.class;
+    }
 
-	@Override
-	public void onMobSpawn(EntityLivingBase entity)
-	{
-	}
+    @Override
+    public void onMobSpawn(EntityLivingBase entity)
+    {
+    }
 
-	//Prevent dupe of slimeling inventory by exact copy spawns
-	//(similar to what MFR does for vanilla donkeys) 
-	@Override
-	public void onMobExactSpawn(EntityLivingBase entity)
-	{
-		EntitySlimeling ent = (EntitySlimeling) entity;
-		ent.slimelingInventory = new InventorySlimeling(ent);
-	}
+    //Prevent dupe of slimeling inventory by exact copy spawns
+    //(similar to what MFR does for vanilla donkeys) 
+    @Override
+    public void onMobExactSpawn(EntityLivingBase entity)
+    {
+        EntitySlimeling ent = (EntitySlimeling) entity;
+        ent.slimelingInventory = new InventorySlimeling(ent);
+    }
 }

@@ -675,8 +675,8 @@ public class WorldUtil
 
             int id = Arrays.binarySearch(ConfigManagerCore.staticLoadDimensions, dimID);
 
-	        if (id >= 0)
-	        {
+            if (id >= 0)
+            {
                 DimensionManager.registerDimension(dimID, WorldUtil.getDimensionTypeById(staticProviderID));
                 WorldUtil.registeredSpaceStations.put(dimID, staticProviderID);
             }
@@ -1323,7 +1323,7 @@ public class WorldUtil
             count++;
         }
 
-		boolean canCreateStations = PermissionAPI.hasPermission(player, Constants.PERMISSION_CREATE_STATION);
+        boolean canCreateStations = PermissionAPI.hasPermission(player, Constants.PERMISSION_CREATE_STATION);
         GalacticraftCore.packetPipeline.sendTo(new PacketSimple(EnumSimplePacket.C_UPDATE_DIMENSION_LIST, GCCoreUtil.getDimensionID(player.world), new Object[] { player.getGameProfile().getName(), dimensionList, canCreateStations }), player);
         stats.setUsingPlanetSelectionGui(true);
         stats.setSavedPlanetList(dimensionList);

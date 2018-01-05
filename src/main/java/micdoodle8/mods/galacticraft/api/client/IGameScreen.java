@@ -2,19 +2,19 @@ package micdoodle8.mods.galacticraft.api.client;
 
 public interface IGameScreen
 {
-	/**
-	 * Set up the frame edge size for this screen.  This
-	 * part must not be drawn when the screen is rendered.
-	 * 
-	 * Typical size: 0.1F for a screen which can be 1.0F x 1.0F or larger
-	 * 
-	 * (This will be called only once during screen initialisation.)  
-	 * 
-	 * @param frameSize
-	 */
-	void setFrameSize(float frameSize);
+    /**
+     * Set up the frame edge size for this screen.  This
+     * part must not be drawn when the screen is rendered.
+     * 
+     * Typical size: 0.1F for a screen which can be 1.0F x 1.0F or larger
+     * 
+     * (This will be called only once during screen initialisation.)  
+     * 
+     * @param frameSize
+     */
+    void setFrameSize(float frameSize);
 
-	/**
+    /**
      * Draw a screen in the XY plane with z == 0.
      * Must fit in the coordinate range (0, 0, 0) - (scaleX, scaleY, 0)
      * 
@@ -36,5 +36,5 @@ public interface IGameScreen
      * IMPORTANT to re-enable it again.
      *
      */
-	void render(int type, float ticks, float scaleX, float scaleY, IScreenManager screen);
-	}
+    void render(int type, float ticks, float scaleX, float scaleY, IScreenManager screen);
+    }

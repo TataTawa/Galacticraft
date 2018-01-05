@@ -1160,7 +1160,7 @@ public class GCPlayerHandler
 
         if (!temp.equals(stats.getSavedPlanetList()) || (player.ticksExisted % 100 == 0))
         {
-			boolean canCreateStations = PermissionAPI.hasPermission(player, Constants.PERMISSION_CREATE_STATION);
+            boolean canCreateStations = PermissionAPI.hasPermission(player, Constants.PERMISSION_CREATE_STATION);
             GalacticraftCore.packetPipeline.sendTo(new PacketSimple(EnumSimplePacket.C_UPDATE_DIMENSION_LIST, GCCoreUtil.getDimensionID(player.world), new Object[] { player.getGameProfile().getName(), temp, canCreateStations }), player);
             stats.setSavedPlanetList(temp);
             //GCLog.debug("Sending to " + player.getGameProfile().getName() + ": " + temp);
@@ -1342,11 +1342,11 @@ public class GCPlayerHandler
             this.sendPlanetList(player, stats);
         }
 
-		/*		if (isInGCDimension || player.usingPlanetSelectionGui)
+        /*		if (isInGCDimension || player.usingPlanetSelectionGui)
                 {
-					player.connection.ticksForFloatKick = 0;
-				}	
-		*/
+                    player.connection.ticksForFloatKick = 0;
+                }	
+        */
         if (stats.getDamageCounter() > 0)
         {
             stats.setDamageCounter(stats.getDamageCounter() - 1);

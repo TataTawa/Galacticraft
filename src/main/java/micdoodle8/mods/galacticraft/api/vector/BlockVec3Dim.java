@@ -41,7 +41,7 @@ public class BlockVec3Dim implements Cloneable
     private static int chunkCacheZ = 1876000; // outside the world edge
     // INVALID_VECTOR is used in cases where a null vector cannot be used
     public static final BlockVec3Dim INVALID_VECTOR = new BlockVec3Dim(-1, -1, -1, -2);
-	
+    
     public BlockVec3Dim()
     {
         this(0, 0, 0, 0);

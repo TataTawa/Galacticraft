@@ -15,7 +15,7 @@ public interface IInventoryGC extends IInventory
      * Drop only the Galacticraft items from the player's inventory.
      * @param player
      */
-	void dropExtendedItems(EntityPlayer player);
+    void dropExtendedItems(EntityPlayer player);
 
     /**
      * Make the implementing inventory a copy of the specified extended inventory.

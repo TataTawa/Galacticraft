@@ -406,12 +406,12 @@ public class TileEntitySolar extends TileBaseUniversalElectricalSource implement
         return nbt;
     }
 
-	/*@Override
+    /*@Override
     public float getRequest(EnumFacing direction)
-	{
-		return 0;
-	}
-	*/
+    {
+        return 0;
+    }
+    */
 
     @Override
     public EnumSet<EnumFacing> getElectricalInputDirections()

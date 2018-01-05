@@ -200,70 +200,70 @@ public class FreefallHandler
 
         /*
         if (freefall)
-		{
-			//If that check didn't produce a result, see if the player is inside the walls
-			//TODO: could apply special weightless movement here like Coriolis force - the player is inside the walls,  not touching them, and in a vacuum
-			int quadrant = 0;
-			double xd = p.posX - this.spinCentreX;
-			double zd = p.posZ - this.spinCentreZ;
-			if (xd<0)
-			{
-				if (xd<-Math.abs(zd))
-				{
-					quadrant = 2;
-				} else
-					quadrant = (zd<0) ? 3 : 1;
-			} else
-				if (xd>Math.abs(zd))
-				{
-					quadrant = 0;
-				} else
-					quadrant = (zd<0) ? 3 : 1;
+        {
+            //If that check didn't produce a result, see if the player is inside the walls
+            //TODO: could apply special weightless movement here like Coriolis force - the player is inside the walls,  not touching them, and in a vacuum
+            int quadrant = 0;
+            double xd = p.posX - this.spinCentreX;
+            double zd = p.posZ - this.spinCentreZ;
+            if (xd<0)
+            {
+                if (xd<-Math.abs(zd))
+                {
+                    quadrant = 2;
+                } else
+                    quadrant = (zd<0) ? 3 : 1;
+            } else
+                if (xd>Math.abs(zd))
+                {
+                    quadrant = 0;
+                } else
+                    quadrant = (zd<0) ? 3 : 1;
 
-			int ymin = MathHelper.floor(p.boundingBox.minY)-1;
-			int ymax = MathHelper.floor(p.boundingBox.maxY);
-			int xmin, xmax, zmin, zmax;
+            int ymin = MathHelper.floor(p.boundingBox.minY)-1;
+            int ymax = MathHelper.floor(p.boundingBox.maxY);
+            int xmin, xmax, zmin, zmax;
 
-			switch (quadrant)
-			{
-			case 0:
-				xmin = MathHelper.floor(p.boundingBox.maxX);
-				xmax = this.ssBoundsMaxX - 1;
-				zmin = MathHelper.floor(p.boundingBox.minZ)-1;
-				zmax = MathHelper.floor(p.boundingBox.maxZ)+1;
-				break;
-			case 1:
-				xmin = MathHelper.floor(p.boundingBox.minX)-1;
-				xmax = MathHelper.floor(p.boundingBox.maxX)+1;
-				zmin = MathHelper.floor(p.boundingBox.maxZ);
-				zmax = this.ssBoundsMaxZ - 1;
-				break;
-			case 2:
-				zmin = MathHelper.floor(p.boundingBox.minZ)-1;
-				zmax = MathHelper.floor(p.boundingBox.maxZ)+1;
-				xmin = this.ssBoundsMinX;
-				xmax = MathHelper.floor(p.boundingBox.minX);
-				break;
-			case 3:
-			default:
-				xmin = MathHelper.floor(p.boundingBox.minX)-1;
-				xmax = MathHelper.floor(p.boundingBox.maxX)+1;
-				zmin = this.ssBoundsMinZ;
-				zmax = MathHelper.floor(p.boundingBox.minZ);
-				break;
-			}
+            switch (quadrant)
+            {
+            case 0:
+                xmin = MathHelper.floor(p.boundingBox.maxX);
+                xmax = this.ssBoundsMaxX - 1;
+                zmin = MathHelper.floor(p.boundingBox.minZ)-1;
+                zmax = MathHelper.floor(p.boundingBox.maxZ)+1;
+                break;
+            case 1:
+                xmin = MathHelper.floor(p.boundingBox.minX)-1;
+                xmax = MathHelper.floor(p.boundingBox.maxX)+1;
+                zmin = MathHelper.floor(p.boundingBox.maxZ);
+                zmax = this.ssBoundsMaxZ - 1;
+                break;
+            case 2:
+                zmin = MathHelper.floor(p.boundingBox.minZ)-1;
+                zmax = MathHelper.floor(p.boundingBox.maxZ)+1;
+                xmin = this.ssBoundsMinX;
+                xmax = MathHelper.floor(p.boundingBox.minX);
+                break;
+            case 3:
+            default:
+                xmin = MathHelper.floor(p.boundingBox.minX)-1;
+                xmax = MathHelper.floor(p.boundingBox.maxX)+1;
+                zmin = this.ssBoundsMinZ;
+                zmax = MathHelper.floor(p.boundingBox.minZ);
+                break;
+            }
 
-			//This block search could cost a lot of CPU (but client side) - maybe optimise later
-			BLOCKCHECK0:
-			for(int x = xmin; x <= xmax; x++)
-				for (int z = zmin; z <= zmax; z++)
-					for (int y = ymin; y <= ymax; y++)
-						if (Blocks.AIR != this.worldProvider.world.getBlock(x, y, z))
-						{
-							freefall = false;
-							break BLOCKCHECK0;
-						}
-		}*/
+            //This block search could cost a lot of CPU (but client side) - maybe optimise later
+            BLOCKCHECK0:
+            for(int x = xmin; x <= xmax; x++)
+                for (int z = zmin; z <= zmax; z++)
+                    for (int y = ymin; y <= ymax; y++)
+                    	if (Blocks.AIR != this.worldProvider.world.getBlock(x, y, z))
+                    	{
+                    		freefall = false;
+                    		break BLOCKCHECK0;
+                    	}
+        }*/
 
         this.onWall = false;
         return true;

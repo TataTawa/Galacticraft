@@ -571,10 +571,10 @@ public abstract class TileBaseUniversalElectrical extends EnergyStorageTile impl
     }
     
     @RuntimeInterface(clazz = "mekanism.api.energy.IStrictEnergyOutputter", modID = CompatibilityManager.modidMekanism)
-	public double pullEnergy(EnumFacing side, double amount, boolean simulate)
-	{
+    public double pullEnergy(EnumFacing side, double amount, boolean simulate)
+    {
     	return 0D;
-	}
+    }
 
     @Override
     public ReceiverMode getModeFromDirection(EnumFacing direction)

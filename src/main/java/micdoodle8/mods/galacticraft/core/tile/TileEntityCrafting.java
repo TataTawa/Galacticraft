@@ -290,7 +290,7 @@ public class TileEntityCrafting extends TileEntity implements IInventoryDefaults
         boolean override = this.overriddenMemory();
         ItemStack target = override ? this.craftMatrix.getStackInSlot(index).copy() : this.memory.get(index);
         
-		if (!target.isEmpty() && !stack.isEmpty() && sameItem(target, stack))
+        if (!target.isEmpty() && !stack.isEmpty() && sameItem(target, stack))
         {
             ItemStack is3 = this.getStackInSlot(index);
             if (is3.isEmpty()) return true;

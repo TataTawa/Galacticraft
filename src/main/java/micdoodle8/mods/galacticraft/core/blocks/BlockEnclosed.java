@@ -190,11 +190,11 @@ public class BlockEnclosed extends Block implements IPartialSealableBlock, ITile
         {
         	if (CompatibilityManager.classBCTransport != null)
         	{
-	            for (int i = 0; i < 6; i++)
-	            {
-	                String pipeName = EnumEnclosedBlockType.values()[i + 7].getBCPipeType();
-	                pipeItemsBC[i] = (Item) CompatibilityManager.classBCTransport.getField(pipeName).get(null);
-	            }
+                for (int i = 0; i < 6; i++)
+                {
+                    String pipeName = EnumEnclosedBlockType.values()[i + 7].getBCPipeType();
+                    pipeItemsBC[i] = (Item) CompatibilityManager.classBCTransport.getField(pipeName).get(null);
+                }
         	}
         }
         catch (Exception e)
@@ -414,8 +414,8 @@ public class BlockEnclosed extends Block implements IPartialSealableBlock, ITile
         		TileEntity tile = worldIn.getTileEntity(pos);
         		if (CompatibilityManager.classBCTransportPipeTile.isInstance(tile))
         		{
-	        		Method m = CompatibilityManager.classBCTransportPipeTile.getMethod("onPlacedBy", EntityLivingBase.class, ItemStack.class);
-	        		m.invoke(tile, placer, new ItemStack(pipeItemsBC[metadata - 7]));
+            		Method m = CompatibilityManager.classBCTransportPipeTile.getMethod("onPlacedBy", EntityLivingBase.class, ItemStack.class);
+            		m.invoke(tile, placer, new ItemStack(pipeItemsBC[metadata - 7]));
         		}
         	}
         	catch (Exception e)

@@ -31,8 +31,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemBucketGC extends ItemBucket implements ISortableItem, ICapabilityProvider
 {
 //	private String texture_prefix;
-	public Fluid accepts;
-	private static HashMap<String, ItemBucketGC> allFluids = new HashMap();
+    public Fluid accepts;
+    private static HashMap<String, ItemBucketGC> allFluids = new HashMap();
 
     public ItemBucketGC(Block block, Fluid fluid)
     {

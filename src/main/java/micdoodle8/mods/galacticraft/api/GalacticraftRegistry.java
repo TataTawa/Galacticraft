@@ -185,12 +185,12 @@ public class GalacticraftRegistry
         return GalacticraftRegistry.buggyBenchRecipes;
     }
 
-	public static List<INasaWorkbenchRecipe> getAstroMinerRecipes()
-	{
+    public static List<INasaWorkbenchRecipe> getAstroMinerRecipes()
+    {
         return GalacticraftRegistry.astroMinerRecipes;
-	}   
+    }   
 
-	@SideOnly(Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     public static ResourceLocation getResouceLocationForDimension(Class<? extends WorldProvider> clazz)
     {
         if (!IGalacticraftWorldProvider.class.isAssignableFrom(clazz))

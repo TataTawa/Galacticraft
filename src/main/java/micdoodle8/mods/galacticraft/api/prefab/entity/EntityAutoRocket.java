@@ -463,11 +463,11 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
 
         if (this.launchPhase >= EnumLaunchPhase.IGNITED.ordinal())
         {
-	        if (this.rocketSoundUpdater != null)
-	        {
-	            this.rocketSoundUpdater.update();
-	            this.rocketSoundToStop = true;
-	        }
+            if (this.rocketSoundUpdater != null)
+            {
+                this.rocketSoundUpdater.update();
+                this.rocketSoundToStop = true;
+            }
         }
         else
         {
@@ -738,51 +738,51 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         //Update client with correct rider if needed
         if (this.world.isRemote)
         {
-	        int shouldBeMountedId = buffer.readInt();
-	        if (this.getPassengers().isEmpty())
-	        {
-	        	 if (shouldBeMountedId > -1)
-	        	 {
-	        		 Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
-	        		 if (e != null)
-	        		 {
-	        			 if (e.dimension != this.dimension)
-	        			 {
-	        				 if (e instanceof EntityPlayer)
-	        				 {
-	        					 e = WorldUtil.forceRespawnClient(this.dimension, e.world.getDifficulty().getDifficultyId(), e.world.getWorldInfo().getTerrainType().getName(), ((EntityPlayerMP)e).interactionManager.getGameType().getID());
-	        					 e.startRiding(this);
-	        				 }
-	        			 }
-	        			 else
-	        				 e.startRiding(this);
-	        		 }
-	        	 }
-	        }
+            int shouldBeMountedId = buffer.readInt();
+            if (this.getPassengers().isEmpty())
+            {
+            	 if (shouldBeMountedId > -1)
+            	 {
+            		 Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
+            		 if (e != null)
+            		 {
+            			 if (e.dimension != this.dimension)
+            			 {
+            				 if (e instanceof EntityPlayer)
+            				 {
+            					 e = WorldUtil.forceRespawnClient(this.dimension, e.world.getDifficulty().getDifficultyId(), e.world.getWorldInfo().getTerrainType().getName(), ((EntityPlayerMP)e).interactionManager.getGameType().getID());
+            					 e.startRiding(this);
+            				 }
+            			 }
+            			 else
+            				 e.startRiding(this);
+            		 }
+            	 }
+            }
             else if (this.getPassengers().get(0).getEntityId() != shouldBeMountedId)
-	        {
-	        	if (shouldBeMountedId == -1)
-	        	{
-	        	    this.removePassengers();
-	        	}
-	        	else
-	        	{
-	        		Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
-	       		 	if (e != null)
-	       		 	{
-	       		 		if (e.dimension != this.dimension)
-	       		 		{
-	       		 			if (e instanceof EntityPlayer)
-	       		 			{
-	       		 				e = WorldUtil.forceRespawnClient(this.dimension, e.world.getDifficulty().getDifficultyId(), e.world.getWorldInfo().getTerrainType().getName(), ((EntityPlayerMP)e).interactionManager.getGameType().getID());
-	       		 				e.startRiding(this);
-	       		 			}
-	       		 		}
-	       		 		else
-	       		 			e.startRiding(this);
-	       		 	}
-	        	}
-	        }
+            {
+            	if (shouldBeMountedId == -1)
+            	{
+            	    this.removePassengers();
+            	}
+            	else
+            	{
+            		Entity e = FMLClientHandler.instance().getWorldClient().getEntityByID(shouldBeMountedId);
+           		 	if (e != null)
+           		 	{
+           		 		if (e.dimension != this.dimension)
+           		 		{
+           		 			if (e instanceof EntityPlayer)
+           		 			{
+           		 				e = WorldUtil.forceRespawnClient(this.dimension, e.world.getDifficulty().getDifficultyId(), e.world.getWorldInfo().getTerrainType().getName(), ((EntityPlayerMP)e).interactionManager.getGameType().getID());
+           		 				e.startRiding(this);
+           		 			}
+           		 		}
+           		 		else
+           		 			e.startRiding(this);
+           		 	}
+            	}
+            }
         }
         this.statusColour = ByteBufUtils.readUTF8String(buffer);
         if (this.statusColour.equals("")) this.statusColour = null;
@@ -943,13 +943,13 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
         {
         	GCPlayerStats stats = null;
         	
-			if (!(this.world.provider instanceof IOrbitDimension))
-			{
-				for (Entity player : this.getPassengers())
-				{
-					if (player instanceof EntityPlayerMP)
-					{
-						stats = GCPlayerStats.get(player);
+            if (!(this.world.provider instanceof IOrbitDimension))
+            {
+                for (Entity player : this.getPassengers())
+                {
+                    if (player instanceof EntityPlayerMP)
+                    {
+                    	stats = GCPlayerStats.get(player);
         				stats.setCoordsTeleportedFromX(player.posX);
         				stats.setCoordsTeleportedFromZ(player.posZ);
         			}

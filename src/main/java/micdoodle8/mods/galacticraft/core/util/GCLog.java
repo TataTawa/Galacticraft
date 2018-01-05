@@ -24,8 +24,8 @@ public class GCLog
         }
     }
 
-	public static void exception(Exception e)
-	{
-		FMLRelaunchLog.log(Constants.MOD_NAME_SIMPLE, Level.ERROR, e.getMessage());
-	}
+    public static void exception(Exception e)
+    {
+        FMLRelaunchLog.log(Constants.MOD_NAME_SIMPLE, Level.ERROR, e.getMessage());
+    }
 }

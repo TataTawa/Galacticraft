@@ -46,7 +46,7 @@ import java.util.zip.Inflater;
 
 public class MapUtil
 {
-	//Mapgen management
+    //Mapgen management
     public static AtomicBoolean calculatingMap = new AtomicBoolean();
     public static AtomicBoolean resetClientFlag = new AtomicBoolean();
     private static MapGen currentMap = null;
@@ -59,8 +59,8 @@ public class MapUtil
 
     public static ArrayList<BlockVec3> biomeColours = new ArrayList<BlockVec3>(40);
     private static Random rand = new Random();
-	private static byte[] overworldImageBytesPart; //Used client side only
-	private static byte[] overworldImageCompressed = null;
+    private static byte[] overworldImageBytesPart; //Used client side only
+    private static byte[] overworldImageCompressed = null;
     
     //Map size definitions
     private static final int SIZE_STD = 176;
@@ -75,8 +75,8 @@ public class MapUtil
     private static final int LARGEMAP_MARKER = 30000001;   //This is a marker to flag world map packets, it must be an impossible cx coordinate
 
     //Color related constants
-	private static final int OCEAN_HEIGHT = 63;
-	private static final int DEEP_OCEAN = 56;
+    private static final int OCEAN_HEIGHT = 63;
+    private static final int DEEP_OCEAN = 56;
     
 
     static
@@ -124,9 +124,9 @@ public class MapUtil
         }
         GalacticraftCore.packetPipeline.sendToServer(new PacketSimple(PacketSimple.EnumSimplePacket.S_REQUEST_OVERWORLD_IMAGE, GCCoreUtil.getDimensionID(FMLClientHandler.instance().getClient().world), new Object[] {}));
         ClientProxyCore.overworldTextureRequestSent = true;
-		DrawGameScreen.reusableMap = new DynamicTexture(MapUtil.SIZE_STD2, MapUtil.SIZE_STD2);
-		MapUtil.biomeColours.clear();
-		setupColours();
+        DrawGameScreen.reusableMap = new DynamicTexture(MapUtil.SIZE_STD2, MapUtil.SIZE_STD2);
+        MapUtil.biomeColours.clear();
+        setupColours();
     }
 
     /**
@@ -443,15 +443,15 @@ public class MapUtil
             if (threadCurrentMap == null)
             {
             	//Create the current map thread, pausing any slow map thread 
-	        	if (slowMap != null)
-	        	{
-	        		slowMap.pause();
-	        	}
-	        	//TODO = should it use a re-usable thread pool?
+            	if (slowMap != null)
+            	{
+            		slowMap.pause();
+            	}
+            	//TODO = should it use a re-usable thread pool?
             	threadCurrentMap = new Thread(currentMap);
                 threadCurrentMap.setName("Background world mapping");
             	threadCurrentMap.setPriority(Thread.NORM_PRIORITY - 1);
-	            threadCurrentMap.start();
+                threadCurrentMap.start();
             }
             else if (currentMap.finishedCalculating.get())
             {
@@ -501,7 +501,7 @@ public class MapUtil
             	threadSlowMap = new Thread(slowMap);
             	threadSlowMap.setName("Background world mapping");
             	threadSlowMap.setPriority(Thread.NORM_PRIORITY - 1);
-	            threadSlowMap.start();
+                threadSlowMap.start();
             }
             else if (slowMap.finishedCalculating.get())
             {
@@ -509,7 +509,7 @@ public class MapUtil
             	threadSlowMap = null;
             	slowMap.writeOutputFile(true);
       			slowMap = null;
-				calculatingMap.set(false);
+                calculatingMap.set(false);
             }
             
             return;

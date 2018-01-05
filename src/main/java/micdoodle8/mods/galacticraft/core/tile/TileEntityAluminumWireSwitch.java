@@ -117,14 +117,14 @@ public class TileEntityAluminumWireSwitch extends TileBaseUniversalConductor
     	{
     		net.split(this);
     	}
-	}
+    }
 
     private boolean disableConnections()
     {
     	return RedstoneUtil.isBlockReceivingRedstone(this.world, this.pos);
     }
     
-	@Override
+    @Override
     public boolean canConnect(EnumFacing direction, NetworkType type)
     {
         return type == NetworkType.POWER && !this.disableConnections();

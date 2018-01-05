@@ -462,14 +462,14 @@ public class GCCoreUtil
         float var = 0.7F;
         while (!stack.isEmpty())
         {
-	        double dx = world.rand.nextFloat() * var + (1.0F - var) * 0.5D;
-	        double dy = world.rand.nextFloat() * var + (1.0F - var) * 0.5D;
-	        double dz = world.rand.nextFloat() * var + (1.0F - var) * 0.5D;
-	        EntityItem entityitem = new EntityItem(world, pos.getX() + dx, pos.getY() + dy, pos.getZ() + dz, stack.splitStack(world.rand.nextInt(21) + 10));
-	
-	        entityitem.setPickupDelay(10);
-	
-	        world.spawnEntity(entityitem);
+            double dx = world.rand.nextFloat() * var + (1.0F - var) * 0.5D;
+            double dy = world.rand.nextFloat() * var + (1.0F - var) * 0.5D;
+            double dz = world.rand.nextFloat() * var + (1.0F - var) * 0.5D;
+            EntityItem entityitem = new EntityItem(world, pos.getX() + dx, pos.getY() + dy, pos.getZ() + dz, stack.splitStack(world.rand.nextInt(21) + 10));
+    
+            entityitem.setPickupDelay(10);
+    
+            world.spawnEntity(entityitem);
         }
     }
 }

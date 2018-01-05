@@ -158,9 +158,9 @@ public class TileEntityElectricFurnace extends TileBaseElectricBlockWithInventor
         }
 
 
-		if (this.tierGC == 1)
+        if (this.tierGC == 1)
         {
-	        if (!this.stacks.get(2).isEmpty())
+            if (!this.stacks.get(2).isEmpty())
             {
                 return (this.stacks.get(2).isItemEqual(result) && this.stacks.get(2).getCount() < 64);
             }

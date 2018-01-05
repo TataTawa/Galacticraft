@@ -309,10 +309,10 @@ public abstract class CelestialBody implements Comparable<CelestialBody>
         }
     }
 
-	public void setUnreachable()
-	{
-		this.isReachable = false;
-	}
+    public void setUnreachable()
+    {
+        this.isReachable = false;
+    }
 
     public String getDimensionSuffix()
     {

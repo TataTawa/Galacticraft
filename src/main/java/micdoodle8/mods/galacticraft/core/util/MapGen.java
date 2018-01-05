@@ -231,8 +231,8 @@ public class MapGen extends BiomeProvider implements Runnable
     {
     	//Allow some time for the pause on any other map gen thread to become effective 
     	try {
-			Thread.currentThread().sleep(90);
-		} catch (InterruptedException e) {}
+            Thread.currentThread().sleep(90);
+        } catch (InterruptedException e) {}
 
         long seed = worldInfo.getSeed();
         this.initialise(seed);
@@ -356,10 +356,10 @@ public class MapGen extends BiomeProvider implements Runnable
         this.biomeCount = new int[limit * limit];
     }
 
-	/*
-	 * Return false while there are further ticks to carry out 
-	 * Return true when completed
-	 */
+    /*
+     * Return false while there are further ticks to carry out 
+     * Return true when completed
+     */
     public boolean BiomeMapOneTick()
     {
     	int limit = Math.min(biomeMapFactor, 16);

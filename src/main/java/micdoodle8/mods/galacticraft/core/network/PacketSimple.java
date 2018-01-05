@@ -1281,13 +1281,13 @@ public class PacketSimple extends PacketBase implements Packet<INetHandler>
         }
     }
 
-	/*
+    /*
      *
-	 * BEGIN "net.minecraft.network.Packet" IMPLEMENTATION
-	 * 
-	 * This is for handling server->client packets before the player has joined the world
-	 * 
-	 */
+     * BEGIN "net.minecraft.network.Packet" IMPLEMENTATION
+     * 
+     * This is for handling server->client packets before the player has joined the world
+     * 
+     */
 
     @Override
     public void readPacketData(PacketBuffer var1)
@@ -1316,11 +1316,11 @@ public class PacketSimple extends PacketBase implements Packet<INetHandler>
         }
     }
 
-	/*
+    /*
      *
-	 * END "net.minecraft.network.Packet" IMPLEMENTATION
-	 * 
-	 * This is for handling server->client packets before the player has joined the world
-	 * 
-	 */
+     * END "net.minecraft.network.Packet" IMPLEMENTATION
+     * 
+     * This is for handling server->client packets before the player has joined the world
+     * 
+     */
 }

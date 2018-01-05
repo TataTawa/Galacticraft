@@ -29,7 +29,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer
 {
     public final static int EMPTY = Fluid.BUCKET_VOLUME + 1;
     private static boolean isTELoaded = CompatibilityManager.isTELoaded();
-	
+    
     private String allowedFluid = null;
 
     public ItemCanisterGeneric(String assetName)
@@ -124,7 +124,7 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer
         {
         	if (capacityPlusOne < 1)
         	{
-	            //It shouldn't be possible, but just in case, set this to a proper filled item
+                //It shouldn't be possible, but just in case, set this to a proper filled item
         		container.setItemDamage(1);
         	}
         	return 0;
@@ -147,9 +147,9 @@ public abstract class ItemCanisterGeneric extends ItemFluidContainer
             }
             if (capacityPlusOne > ItemCanisterGeneric.EMPTY)
             {
-	            //It shouldn't be possible, but just in case, set this to a proper empty item
+                //It shouldn't be possible, but just in case, set this to a proper empty item
             	capacityPlusOne = ItemCanisterGeneric.EMPTY;
-	            container.setItemDamage(capacityPlusOne);
+                container.setItemDamage(capacityPlusOne);
             }
         }
         

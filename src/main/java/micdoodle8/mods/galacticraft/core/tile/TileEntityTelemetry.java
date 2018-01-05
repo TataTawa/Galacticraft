@@ -386,7 +386,7 @@ public class TileEntityTelemetry extends TileEntity implements ITickable
     {
         for (BlockVec3Dim telemeter : loadedList)
         {
-			TileEntity te = telemeter.getTileEntityNoLoad();
+            TileEntity te = telemeter.getTileEntityNoLoad();
             if (te instanceof TileEntityTelemetry)
             {
                 if (((TileEntityTelemetry) te).linkedEntity == playerOld)

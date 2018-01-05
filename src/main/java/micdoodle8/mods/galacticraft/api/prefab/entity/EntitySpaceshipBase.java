@@ -139,7 +139,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
     {
         if (!this.world.isRemote && !this.isDead)
         {
-			boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
+            boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
         	Entity e = par1DamageSource.getEntity(); 
             if (this.isEntityInvulnerable(par1DamageSource) || this.posY > 300 || (e instanceof EntityLivingBase && !(e instanceof EntityPlayer)))
             {
@@ -160,15 +160,15 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
                 {
                     this.removePassengers();
 
-					if (flag)
-					{
-						this.setDead();
-					}
-					else
-					{
-						this.setDead();
-						this.dropShipAsItem();
-					}
+                    if (flag)
+                    {
+                    	this.setDead();
+                    }
+                    else
+                    {
+                    	this.setDead();
+                    	this.dropShipAsItem();
+                    }
                     return true;
                 }
 
@@ -230,15 +230,15 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         if (this.addToTelemetry)
         {
         	this.addToTelemetry = false;
-			for (BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList))
-			{
-				TileEntity t1 = vec.getTileEntityNoLoad();
-				if (t1 instanceof TileEntityTelemetry && !t1.isInvalid())
-				{
-					if (((TileEntityTelemetry)t1).linkedEntity == this)
-						((TileEntityTelemetry)t1).addTrackedEntity(this);
-				}		
-			}
+            for (BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList))
+            {
+                TileEntity t1 = vec.getTileEntityNoLoad();
+                if (t1 instanceof TileEntityTelemetry && !t1.isInvalid())
+                {
+                    if (((TileEntityTelemetry)t1).linkedEntity == this)
+                    	((TileEntityTelemetry)t1).addTrackedEntity(this);
+                }		
+            }
         }
 
         for (Entity e : this.getPassengers())
@@ -265,12 +265,12 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
 
         if (!this.world.isRemote)
         {
-	        if (this.posY < 0.0D)
-	        {
-	            this.kill();
-	        }
-	        else if (this.posY > (this.world.provider instanceof IExitHeight ? ((IExitHeight) this.world.provider).getYCoordinateToTeleport() : 1200) + 100)
-	        {
+            if (this.posY < 0.0D)
+            {
+                this.kill();
+            }
+            else if (this.posY > (this.world.provider instanceof IExitHeight ? ((IExitHeight) this.world.provider).getYCoordinateToTeleport() : 1200) + 100)
+            {
                 for (Entity e : this.getPassengers())
                 {
                     if (e instanceof EntityPlayerMP)
@@ -289,7 +289,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
                 {
                     this.failRocket();
                 }
-	        }
+            }
         }
         
         if (this.launchPhase == EnumLaunchPhase.UNIGNITED.ordinal())
@@ -664,58 +664,58 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
         }
     }
 
-	public void addTelemetry(TileEntityTelemetry tile)
-	{
-		this.telemetryList.add(new BlockVec3Dim(tile));
-	}
+    public void addTelemetry(TileEntityTelemetry tile)
+    {
+        this.telemetryList.add(new BlockVec3Dim(tile));
+    }
 
-	public ArrayList<TileEntityTelemetry> getTelemetry()
-	{
-		ArrayList<TileEntityTelemetry> returnList = new ArrayList<TileEntityTelemetry>();
-		for (BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList))
-		{
-			TileEntity t1 = vec.getTileEntity();
-			if (t1 instanceof TileEntityTelemetry && !t1.isInvalid())
-			{
-				if (((TileEntityTelemetry)t1).linkedEntity == this)
-					returnList.add((TileEntityTelemetry)t1);
-			}		
-		}
-		return returnList;
-	}
-	
+    public ArrayList<TileEntityTelemetry> getTelemetry()
+    {
+        ArrayList<TileEntityTelemetry> returnList = new ArrayList<TileEntityTelemetry>();
+        for (BlockVec3Dim vec : new ArrayList<BlockVec3Dim>(this.telemetryList))
+        {
+            TileEntity t1 = vec.getTileEntity();
+            if (t1 instanceof TileEntityTelemetry && !t1.isInvalid())
+            {
+                if (((TileEntityTelemetry)t1).linkedEntity == this)
+                    returnList.add((TileEntityTelemetry)t1);
+            }		
+        }
+        return returnList;
+    }
+    
     @Override
     public void transmitData(int[] data)
     {
-		data[0] = this.timeUntilLaunch;
-		data[1] = (int) this.posY;
-		//data[2] is entity speed already set as default by TileEntityTelemetry
-		data[3] = this.getScaledFuelLevel(100);
-		data[4] = (int) this.rotationPitch;
+        data[0] = this.timeUntilLaunch;
+        data[1] = (int) this.posY;
+        //data[2] is entity speed already set as default by TileEntityTelemetry
+        data[3] = this.getScaledFuelLevel(100);
+        data[4] = (int) this.rotationPitch;
     }
-	
+    
     @Override
     public void receiveData(int[] data, String[] str)
     {
-		//Spaceships:
-		//  data0 = launch countdown
-		//  data1 = height
-		//  data2 = speed
-		//  data3 = fuel remaining
-		//  data4 = pitch angle
-		int countdown = data[0];
-		str[0] = "";
-		str[1] = (countdown == 400) ? GCCoreUtil.translate("gui.rocket.on_launchpad") : ((countdown > 0) ? GCCoreUtil.translate("gui.rocket.countdown") + ": " + countdown / 20 : GCCoreUtil.translate("gui.rocket.launched"));
-		str[2] = GCCoreUtil.translate("gui.rocket.height") + ": " + data[1];
-		str[3] = GameScreenText.makeSpeedString(data[2]);
-		str[4] = GCCoreUtil.translate("gui.message.fuel.name") + ": " + data[3] + "%";
+        //Spaceships:
+        //  data0 = launch countdown
+        //  data1 = height
+        //  data2 = speed
+        //  data3 = fuel remaining
+        //  data4 = pitch angle
+        int countdown = data[0];
+        str[0] = "";
+        str[1] = (countdown == 400) ? GCCoreUtil.translate("gui.rocket.on_launchpad") : ((countdown > 0) ? GCCoreUtil.translate("gui.rocket.countdown") + ": " + countdown / 20 : GCCoreUtil.translate("gui.rocket.launched"));
+        str[2] = GCCoreUtil.translate("gui.rocket.height") + ": " + data[1];
+        str[3] = GameScreenText.makeSpeedString(data[2]);
+        str[4] = GCCoreUtil.translate("gui.message.fuel.name") + ": " + data[3] + "%";
     }
 
     @Override
     public void adjustDisplay(int[] data)
     {
-		GL11.glRotatef(data[4], -1, 0, 0);
-		GL11.glTranslatef(0, this.height / 4, 0);
+        GL11.glRotatef(data[4], -1, 0, 0);
+        GL11.glTranslatef(0, this.height / 4, 0);
     }
 
     /**
