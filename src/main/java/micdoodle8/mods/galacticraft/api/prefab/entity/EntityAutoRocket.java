@@ -949,7 +949,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
                 {
                     if (player instanceof EntityPlayerMP)
                     {
-                    	stats = GCPlayerStats.get(player);
+                        stats = GCPlayerStats.get(player);
         				stats.setCoordsTeleportedFromX(player.posX);
         				stats.setCoordsTeleportedFromZ(player.posZ);
         			}
@@ -1284,7 +1284,7 @@ public abstract class EntityAutoRocket extends EntitySpaceshipBase implements IL
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityplayer)
     {
-        return !this.isDead && entityplayer.getDistanceSqToEntity(this) <= 64.0D;
+        return !this.isDead && entityplayer.getDistanceSq(this) <= 64.0D;
     }
 
     @Override

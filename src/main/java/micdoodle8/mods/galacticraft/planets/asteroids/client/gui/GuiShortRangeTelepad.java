@@ -99,8 +99,8 @@ public class GuiShortRangeTelepad extends GuiContainerGC implements ITextBoxCall
         this.buttonList.add(this.address);
         this.buttonList.add(this.targetAddress);
         this.electricInfoRegion.tooltipStrings = new ArrayList<String>();
-        this.electricInfoRegion.xPosition = (this.width - this.xSize) / 2 + 98;
-        this.electricInfoRegion.yPosition = (this.height - this.ySize) / 2 + 113;
+        this.electricInfoRegion.x = (this.width - this.xSize) / 2 + 98;
+        this.electricInfoRegion.y = (this.height - this.ySize) / 2 + 113;
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
@@ -142,15 +142,15 @@ public class GuiShortRangeTelepad extends GuiContainerGC implements ITextBoxCall
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
         String displayString = this.telepad.getName();
-        this.fontRendererObj.drawString(displayString, this.xSize / 2 - this.fontRendererObj.getStringWidth(displayString) / 2, 5, 4210752);
+        this.fontRenderer.drawString(displayString, this.xSize / 2 - this.fontRenderer.getStringWidth(displayString) / 2, 5, 4210752);
 
-        this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, 115, 4210752);
-        this.fontRendererObj.drawString(GCCoreUtil.translate("gui.message.address.name") + ":", 7, 22, 4210752);
-        this.fontRendererObj.drawString(GCCoreUtil.translate("gui.message.dest_address.name") + ":", 7, 44, 4210752);
-        this.fontRendererObj.drawString(this.telepad.getReceivingStatus(), 7, 66, 4210752);
+        this.fontRenderer.drawString(GCCoreUtil.translate("container.inventory"), 8, 115, 4210752);
+        this.fontRenderer.drawString(GCCoreUtil.translate("gui.message.address.name") + ":", 7, 22, 4210752);
+        this.fontRenderer.drawString(GCCoreUtil.translate("gui.message.dest_address.name") + ":", 7, 44, 4210752);
+        this.fontRenderer.drawString(this.telepad.getReceivingStatus(), 7, 66, 4210752);
         if (!this.telepad.getReceivingStatus().equals(this.telepad.getSendingStatus()))
         {
-            this.fontRendererObj.drawString(this.telepad.getSendingStatus(), 7, 88, 4210752);
+            this.fontRenderer.drawString(this.telepad.getSendingStatus(), 7, 88, 4210752);
         }
     }
 

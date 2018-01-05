@@ -67,8 +67,8 @@ public class GuiTerraformer extends GuiContainerGC implements ICheckBoxCallback
     {
         super.initGui();
         this.electricInfoRegion.tooltipStrings = new ArrayList<String>();
-        this.electricInfoRegion.xPosition = (this.width - this.xSize) / 2 + 44;
-        this.electricInfoRegion.yPosition = (this.height - this.ySize) / 2 + 47;
+        this.electricInfoRegion.x = (this.width - this.xSize) / 2 + 44;
+        this.electricInfoRegion.y = (this.height - this.ySize) / 2 + 47;
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
@@ -80,8 +80,8 @@ public class GuiTerraformer extends GuiContainerGC implements ICheckBoxCallback
         batterySlotDesc.add(GCCoreUtil.translate("gui.show_bubble.desc.0"));
         this.infoRegions.add(new GuiElementInfoRegion((this.width - this.xSize) / 2 + 85, (this.height - this.ySize) / 2 + 132, 85, 13, batterySlotDesc, this.width, this.height, this));
         this.waterTankInfoRegion.tooltipStrings = new ArrayList<String>();
-        this.waterTankInfoRegion.xPosition = (this.width - this.xSize) / 2 + 55;
-        this.waterTankInfoRegion.yPosition = (this.height - this.ySize) / 2 + 17;
+        this.waterTankInfoRegion.x = (this.width - this.xSize) / 2 + 55;
+        this.waterTankInfoRegion.y = (this.height - this.ySize) / 2 + 17;
         this.waterTankInfoRegion.parentWidth = this.width;
         this.waterTankInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.waterTankInfoRegion);
@@ -121,11 +121,11 @@ public class GuiTerraformer extends GuiContainerGC implements ICheckBoxCallback
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
         String displayString = terraformer.getName();
-        this.fontRendererObj.drawString(displayString, this.xSize / 2 - this.fontRendererObj.getStringWidth(displayString) / 2, 5, 4210752);
-        this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, 144, 4210752);
-        this.fontRendererObj.drawSplitString(this.getStatus(), 105, 24, this.xSize - 105, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.terraformer.ueWattsPerTick * 20, ElectricUnit.WATT), 105, 56, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.terraformer.getVoltage(), ElectricUnit.VOLTAGE), 105, 68, 4210752);
+        this.fontRenderer.drawString(displayString, this.xSize / 2 - this.fontRenderer.getStringWidth(displayString) / 2, 5, 4210752);
+        this.fontRenderer.drawString(GCCoreUtil.translate("container.inventory"), 8, 144, 4210752);
+        this.fontRenderer.drawSplitString(this.getStatus(), 105, 24, this.xSize - 105, 4210752);
+        //		this.fontRenderer.drawString(ElectricityDisplay.getDisplay(this.terraformer.ueWattsPerTick * 20, ElectricUnit.WATT), 105, 56, 4210752);
+        //		this.fontRenderer.drawString(ElectricityDisplay.getDisplay(this.terraformer.getVoltage(), ElectricUnit.VOLTAGE), 105, 68, 4210752);
     }
 
     private String getStatus()

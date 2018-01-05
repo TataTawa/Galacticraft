@@ -1,5 +1,14 @@
 package micdoodle8.mods.galacticraft.core.tile;
 
+import io.netty.buffer.ByteBuf;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import micdoodle8.mods.galacticraft.api.item.IPaintable;
 import micdoodle8.mods.galacticraft.api.tile.IDisableableMachine;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
@@ -10,7 +19,6 @@ import micdoodle8.mods.galacticraft.core.inventory.IInventoryDefaults;
 import micdoodle8.mods.galacticraft.core.network.IPacketReceiver;
 import micdoodle8.mods.galacticraft.core.network.PacketDynamic;
 import micdoodle8.mods.galacticraft.core.util.ColorUtil;
-import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -19,7 +27,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemDye;
@@ -31,12 +38,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
-import ic2.api.item.IC2Items;
-import io.netty.buffer.ByteBuf;
-
-import java.util.*;
-
-import biomesoplenty.api.item.BOPItems;
 
 //import net.minecraft.item.EnumDyeColor;
 
@@ -102,7 +103,7 @@ public class TileEntityPainter extends TileEntity implements IDisableableMachine
         else if (item instanceof ItemBlock)
         {
             color = ColorUtil.lighten(color, 0.03F);
-            Block b = ((ItemBlock)item).block;
+            Block b = ((ItemBlock)item).getBlock();
             int result = 0;
             if (b instanceof IPaintable)
             {
@@ -416,23 +417,23 @@ public class TileEntityPainter extends TileEntity implements IDisableableMachine
     {
         Item item = itemStack.getItem();
 
-        if (CompatibilityManager.isIc2Loaded())
-        {
-            ItemStack ic2paintbrush = IC2Items.getItem("painter");
-            if (ic2paintbrush != null && item == ic2paintbrush.getItem())
-            {
-                return ItemDye.DYE_COLORS[itemStack.getItemDamage()];
-            }
-        }
-
-        if (CompatibilityManager.isBOPLoaded())
-        {
-            if (item == BOPItems.black_dye) return ItemDye.DYE_COLORS[EnumDyeColor.BLACK.getDyeDamage()];
-            if (item == BOPItems.blue_dye) return ItemDye.DYE_COLORS[EnumDyeColor.BLUE.getDyeDamage()];
-            if (item == BOPItems.brown_dye) return ItemDye.DYE_COLORS[EnumDyeColor.BROWN.getDyeDamage()];
-            if (item == BOPItems.green_dye) return ItemDye.DYE_COLORS[EnumDyeColor.GREEN.getDyeDamage()];
-            if (item == BOPItems.white_dye) return ItemDye.DYE_COLORS[EnumDyeColor.WHITE.getDyeDamage()];
-        }
+//        if (CompatibilityManager.isIc2Loaded())
+//        {
+//            ItemStack ic2paintbrush = IC2Items.getItem("painter");
+//            if (ic2paintbrush != null && item == ic2paintbrush.getItem())
+//            {
+//                return ItemDye.DYE_COLORS[itemStack.getItemDamage()];
+//            }
+//        }
+//
+//        if (CompatibilityManager.isBOPLoaded())
+//        {
+//            if (item == BOPItems.black_dye) return ItemDye.DYE_COLORS[EnumDyeColor.BLACK.getDyeDamage()];
+//            if (item == BOPItems.blue_dye) return ItemDye.DYE_COLORS[EnumDyeColor.BLUE.getDyeDamage()];
+//            if (item == BOPItems.brown_dye) return ItemDye.DYE_COLORS[EnumDyeColor.BROWN.getDyeDamage()];
+//            if (item == BOPItems.green_dye) return ItemDye.DYE_COLORS[EnumDyeColor.GREEN.getDyeDamage()];
+//            if (item == BOPItems.white_dye) return ItemDye.DYE_COLORS[EnumDyeColor.WHITE.getDyeDamage()];
+//        }
 
         return -1;
     }

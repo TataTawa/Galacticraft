@@ -58,7 +58,7 @@ public class TileEntityBeamReflectorRenderer extends TileEntitySpecialRenderer<T
     }
 
     @Override
-    public void renderTileEntityAt(TileEntityBeamReflector tile, double d, double d1, double d2, float f, int i)
+    public void render(TileEntityBeamReflector tile, double d, double d1, double d2, float partialTickTime, int par9, float alpha)
     {
         GL11.glPushMatrix();
 

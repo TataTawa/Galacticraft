@@ -1,5 +1,8 @@
 package micdoodle8.mods.galacticraft.core.world.gen;
 
+import java.util.List;
+import java.util.Random;
+
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
 import micdoodle8.mods.galacticraft.core.GCBlocks;
 import micdoodle8.mods.galacticraft.core.blocks.BlockBasicMoon;
@@ -20,12 +23,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.ChunkProviderOverworld;
+import net.minecraft.world.gen.ChunkGeneratorOverworld;
 
-import java.util.List;
-import java.util.Random;
-
-public class ChunkProviderMoon extends ChunkProviderOverworld
+public class ChunkProviderMoon extends ChunkGeneratorOverworld
 {
     private final IBlockState BLOCK_TOP = GCBlocks.blockMoon.getDefaultState().withProperty(BlockBasicMoon.BASIC_TYPE_MOON, BlockBasicMoon.EnumBlockBasicMoon.MOON_TURF);
     private final IBlockState BLOCK_FILL = GCBlocks.blockMoon.getDefaultState().withProperty(BlockBasicMoon.BASIC_TYPE_MOON, BlockBasicMoon.EnumBlockBasicMoon.MOON_DIRT);
@@ -174,7 +174,7 @@ public class ChunkProviderMoon extends ChunkProviderOverworld
     }
 
     @Override
-    public Chunk provideChunk(int x, int z)
+    public Chunk generateChunk(int x, int z)
     {
         this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
         ChunkPrimer chunkprimer = new ChunkPrimer();

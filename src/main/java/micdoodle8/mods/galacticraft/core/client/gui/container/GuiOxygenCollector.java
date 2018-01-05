@@ -38,13 +38,13 @@ public class GuiOxygenCollector extends GuiContainerGC
         batterySlotDesc.add(GCCoreUtil.translate("gui.battery_slot.desc.0"));
         batterySlotDesc.add(GCCoreUtil.translate("gui.battery_slot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion((this.width - this.xSize) / 2 + 31, (this.height - this.ySize) / 2 + 26, 18, 18, batterySlotDesc, this.width, this.height, this));
-        this.oxygenInfoRegion.xPosition = (this.width - this.xSize) / 2 + 112;
-        this.oxygenInfoRegion.yPosition = (this.height - this.ySize) / 2 + 24;
+        this.oxygenInfoRegion.x = (this.width - this.xSize) / 2 + 112;
+        this.oxygenInfoRegion.y = (this.height - this.ySize) / 2 + 24;
         this.oxygenInfoRegion.parentWidth = this.width;
         this.oxygenInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.oxygenInfoRegion);
-        this.electricInfoRegion.xPosition = (this.width - this.xSize) / 2 + 112;
-        this.electricInfoRegion.yPosition = (this.height - this.ySize) / 2 + 37;
+        this.electricInfoRegion.x = (this.width - this.xSize) / 2 + 112;
+        this.electricInfoRegion.y = (this.height - this.ySize) / 2 + 37;
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
@@ -53,13 +53,13 @@ public class GuiOxygenCollector extends GuiContainerGC
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.fontRendererObj.drawString(this.collector.getName(), 8, 10, 4210752);
-        GCCoreUtil.drawStringRightAligned(GCCoreUtil.translate("gui.message.out.name") + ":", 99, 25, 4210752, this.fontRendererObj);
-        GCCoreUtil.drawStringRightAligned(GCCoreUtil.translate("gui.message.in.name") + ":", 99, 37, 4210752, this.fontRendererObj);
-        GCCoreUtil.drawStringCentered(GCCoreUtil.translate("gui.message.status.name") + ": " + this.getStatus(), this.xSize / 2, 50, 4210752, this.fontRendererObj);
+        this.fontRenderer.drawString(this.collector.getName(), 8, 10, 4210752);
+        GCCoreUtil.drawStringRightAligned(GCCoreUtil.translate("gui.message.out.name") + ":", 99, 25, 4210752, this.fontRenderer);
+        GCCoreUtil.drawStringRightAligned(GCCoreUtil.translate("gui.message.in.name") + ":", 99, 37, 4210752, this.fontRenderer);
+        GCCoreUtil.drawStringCentered(GCCoreUtil.translate("gui.message.status.name") + ": " + this.getStatus(), this.xSize / 2, 50, 4210752, this.fontRenderer);
         String status = GCCoreUtil.translate("gui.status.collecting.name") + ": " + (int) (0.5F + Math.min(this.collector.lastOxygenCollected * 20F, TileEntityOxygenCollector.OUTPUT_PER_TICK * 20F)) + GCCoreUtil.translate("gui.per_second");
-        GCCoreUtil.drawStringCentered(status, this.xSize / 2, 60, 4210752, this.fontRendererObj);
-        this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 90 + 2, 4210752);
+        GCCoreUtil.drawStringCentered(status, this.xSize / 2, 60, 4210752, this.fontRenderer);
+        this.fontRenderer.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 90 + 2, 4210752);
     }
 
     private String getStatus()

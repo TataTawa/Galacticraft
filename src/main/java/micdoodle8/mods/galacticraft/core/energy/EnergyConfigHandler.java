@@ -1,14 +1,11 @@
 package micdoodle8.mods.galacticraft.core.energy;
 
-import mekanism.api.gas.Gas;
-import mekanism.api.gas.GasRegistry;
-import micdoodle8.mods.galacticraft.core.GCFluids;
+import java.io.File;
+import java.util.ArrayList;
+
 import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 import micdoodle8.mods.galacticraft.core.util.GCLog;
 import net.minecraftforge.common.config.Configuration;
-
-import java.io.File;
-import java.util.ArrayList;
 
 /**
  * The universal energy compatibility module allows Galacticraft to be
@@ -185,30 +182,30 @@ public class EnergyConfigHandler
 
     public static void initGas()
     {
-        if (EnergyConfigHandler.isMekanismLoaded())
-        {
-            Gas oxygen = GasRegistry.getGas("oxygen");
-
-            if (oxygen == null)
-            {
-                EnergyConfigHandler.gasOxygen = GasRegistry.register(new Gas(GCFluids.fluidOxygenGas)).registerFluid();
-            }
-            else
-            {
-                EnergyConfigHandler.gasOxygen = oxygen;
-            }
-
-            Gas hydrogen = GasRegistry.getGas("hydrogen");
-
-            if (hydrogen == null)
-            {
-                EnergyConfigHandler.gasHydrogen = GasRegistry.register(new Gas(GCFluids.fluidHydrogenGas)).registerFluid();
-            }
-            else
-            {
-                EnergyConfigHandler.gasHydrogen = hydrogen;
-            }
-        }
+//        if (EnergyConfigHandler.isMekanismLoaded())
+//        {
+//            Gas oxygen = GasRegistry.getGas("oxygen");
+//
+//            if (oxygen == null)
+//            {
+//                EnergyConfigHandler.gasOxygen = GasRegistry.register(new Gas(GCFluids.fluidOxygenGas)).registerFluid();
+//            }
+//            else
+//            {
+//                EnergyConfigHandler.gasOxygen = oxygen;
+//            }
+//
+//            Gas hydrogen = GasRegistry.getGas("hydrogen");
+//
+//            if (hydrogen == null)
+//            {
+//                EnergyConfigHandler.gasHydrogen = GasRegistry.register(new Gas(GCFluids.fluidHydrogenGas)).registerFluid();
+//            }
+//            else
+//            {
+//                EnergyConfigHandler.gasHydrogen = hydrogen;
+//            }
+//        }
     }
 
     /**

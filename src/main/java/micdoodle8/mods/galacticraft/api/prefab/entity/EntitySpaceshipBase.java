@@ -139,8 +139,8 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
     {
         if (!this.world.isRemote && !this.isDead)
         {
-            boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
-        	Entity e = par1DamageSource.getEntity(); 
+            boolean flag = par1DamageSource.getTrueSource() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getTrueSource()).capabilities.isCreativeMode;
+        	Entity e = par1DamageSource.getTrueSource(); 
             if (this.isEntityInvulnerable(par1DamageSource) || this.posY > 300 || (e instanceof EntityLivingBase && !(e instanceof EntityPlayer)))
             {
                 return false;
@@ -162,12 +162,12 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
 
                     if (flag)
                     {
-                    	this.setDead();
+                        this.setDead();
                     }
                     else
                     {
-                    	this.setDead();
-                    	this.dropShipAsItem();
+                        this.setDead();
+                        this.dropShipAsItem();
                     }
                     return true;
                 }
@@ -194,7 +194,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
 
             if (item.hasTagCompound())
             {
-                entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
+                entityItem.getItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
             }
         }
     }
@@ -236,7 +236,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
                 if (t1 instanceof TileEntityTelemetry && !t1.isInvalid())
                 {
                     if (((TileEntityTelemetry)t1).linkedEntity == this)
-                    	((TileEntityTelemetry)t1).addTrackedEntity(this);
+                        ((TileEntityTelemetry)t1).addTrackedEntity(this);
                 }		
             }
         }
@@ -739,7 +739,7 @@ public abstract class EntitySpaceshipBase extends Entity implements IPacketRecei
     
     @Override
     @SideOnly(Side.CLIENT)
-    public int getBrightnessForRender(float partialTicks)
+    public int getBrightnessForRender()
     {
         double height = this.posY + (double)this.getEyeHeight();
         if (height > 255D) height = 255D;

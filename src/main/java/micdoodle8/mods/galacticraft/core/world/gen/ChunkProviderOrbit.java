@@ -1,5 +1,7 @@
 package micdoodle8.mods.galacticraft.core.world.gen;
 
+import java.util.Random;
+
 import micdoodle8.mods.galacticraft.core.GCBlocks;
 import micdoodle8.mods.galacticraft.core.tile.IMultiBlock;
 import net.minecraft.block.BlockFalling;
@@ -9,11 +11,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.ChunkProviderOverworld;
+import net.minecraft.world.gen.ChunkGeneratorOverworld;
 
-import java.util.Random;
-
-public class ChunkProviderOrbit extends ChunkProviderOverworld
+public class ChunkProviderOrbit extends ChunkGeneratorOverworld
 {
     private final Random rand;
 
@@ -27,7 +27,7 @@ public class ChunkProviderOrbit extends ChunkProviderOverworld
     }
 
     @Override
-    public Chunk provideChunk(int par1, int par2)
+    public Chunk generateChunk(int par1, int par2)
     {
         ChunkPrimer chunkprimer = new ChunkPrimer();
         this.rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);

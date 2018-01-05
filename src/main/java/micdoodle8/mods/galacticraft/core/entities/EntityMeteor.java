@@ -74,11 +74,11 @@ public class EntityMeteor extends Entity
 
         if (var3 != null)
         {
-            var2 = new Vec3d(var3.hitVec.xCoord, var3.hitVec.yCoord, var3.hitVec.zCoord);
+            var2 = new Vec3d(var3.hitVec.x, var3.hitVec.y, var3.hitVec.z);
         }
 
         Entity var4 = null;
-        final List<?> var5 = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(2.0D, 2.0D, 2.0D));
+        final List<?> var5 = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(2.0D, 2.0D, 2.0D));
         double var6 = 0.0D;
         final Iterator<?> var8 = var5.iterator();
 
@@ -155,7 +155,7 @@ public class EntityMeteor extends Entity
     }
 
     @Override
-    public boolean verifyExplosion(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn, float p_174816_5_)
+    public boolean canExplosionDestroyBlock(Explosion explosionIn, World worldIn, BlockPos pos, IBlockState blockStateIn, float p_174816_5_)
     {
         return ConfigManagerCore.meteorBlockDamageEnabled;
     }

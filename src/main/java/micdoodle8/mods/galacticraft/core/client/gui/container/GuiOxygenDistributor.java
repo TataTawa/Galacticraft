@@ -56,8 +56,8 @@ public class GuiOxygenDistributor extends GuiContainerGC implements ICheckBoxCal
         oxygenDesc.add(GCCoreUtil.translate("gui.oxygen_storage.desc.0"));
         oxygenDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.oxygen_storage.desc.1") + ": " + ((int) Math.floor(this.distributor.getOxygenStored()) + " / " + (int) Math.floor(this.distributor.getMaxOxygenStored())));
         this.oxygenInfoRegion.tooltipStrings = oxygenDesc;
-        this.oxygenInfoRegion.xPosition = (this.width - this.xSize) / 2 + 112;
-        this.oxygenInfoRegion.yPosition = (this.height - this.ySize) / 2 + 24;
+        this.oxygenInfoRegion.x = (this.width - this.xSize) / 2 + 112;
+        this.oxygenInfoRegion.y = (this.height - this.ySize) / 2 + 24;
         this.oxygenInfoRegion.parentWidth = this.width;
         this.oxygenInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.oxygenInfoRegion);
@@ -65,8 +65,8 @@ public class GuiOxygenDistributor extends GuiContainerGC implements ICheckBoxCal
         electricityDesc.add(GCCoreUtil.translate("gui.energy_storage.desc.0"));
         electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energy_storage.desc.1") + ((int) Math.floor(this.distributor.getEnergyStoredGC()) + " / " + (int) Math.floor(this.distributor.getMaxEnergyStoredGC())));
         this.electricInfoRegion.tooltipStrings = electricityDesc;
-        this.electricInfoRegion.xPosition = (this.width - this.xSize) / 2 + 112;
-        this.electricInfoRegion.yPosition = (this.height - this.ySize) / 2 + 37;
+        this.electricInfoRegion.x = (this.width - this.xSize) / 2 + 112;
+        this.electricInfoRegion.y = (this.height - this.ySize) / 2 + 37;
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
@@ -77,18 +77,18 @@ public class GuiOxygenDistributor extends GuiContainerGC implements ICheckBoxCal
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.fontRendererObj.drawString(this.distributor.getName(), 8, 10, 4210752);
-        GCCoreUtil.drawStringRightAligned(GCCoreUtil.translate("gui.message.in.name") + ":", 99, 26, 4210752, this.fontRendererObj);
-        GCCoreUtil.drawStringRightAligned(GCCoreUtil.translate("gui.message.in.name") + ":", 99, 38, 4210752, this.fontRendererObj);
+        this.fontRenderer.drawString(this.distributor.getName(), 8, 10, 4210752);
+        GCCoreUtil.drawStringRightAligned(GCCoreUtil.translate("gui.message.in.name") + ":", 99, 26, 4210752, this.fontRenderer);
+        GCCoreUtil.drawStringRightAligned(GCCoreUtil.translate("gui.message.in.name") + ":", 99, 38, 4210752, this.fontRenderer);
         String status = GCCoreUtil.translate("gui.message.status.name") + ": " + this.getStatus();
-        this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2, 50, 4210752);
+        this.fontRenderer.drawString(status, this.xSize / 2 - this.fontRenderer.getStringWidth(status) / 2, 50, 4210752);
         status = GCCoreUtil.translate("gui.oxygen_use.desc") + ": " + this.distributor.oxygenPerTick * 20 + GCCoreUtil.translate("gui.per_second");
-        this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2, 60, 4210752);
+        this.fontRenderer.drawString(status, this.xSize / 2 - this.fontRenderer.getStringWidth(status) / 2, 60, 4210752);
         //		status = ElectricityDisplay.getDisplay(this.distributor.ueWattsPerTick * 20, ElectricUnit.WATT);
-        //		this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2, 70, 4210752);
+        //		this.fontRenderer.drawString(status, this.xSize / 2 - this.fontRenderer.getStringWidth(status) / 2, 70, 4210752);
         //		status = ElectricityDisplay.getDisplay(this.distributor.getVoltage(), ElectricUnit.VOLTAGE);
-        //		this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2, 80, 4210752);
-        this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 90 + 3, 4210752);
+        //		this.fontRenderer.drawString(status, this.xSize / 2 - this.fontRenderer.getStringWidth(status) / 2, 80, 4210752);
+        this.fontRenderer.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 90 + 3, 4210752);
     }
 
     private String getStatus()

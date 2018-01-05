@@ -54,8 +54,8 @@ public class GuiCargoUnloader extends GuiContainerGC
         electricityDesc.add(GCCoreUtil.translate("gui.energy_storage.desc.0"));
         electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energy_storage.desc.1") + ((int) Math.floor(this.cargoUnloader.getEnergyStoredGC()) + " / " + (int) Math.floor(this.cargoUnloader.getMaxEnergyStoredGC())));
         this.electricInfoRegion.tooltipStrings = electricityDesc;
-        this.electricInfoRegion.xPosition = (this.width - this.xSize) / 2 + 107;
-        this.electricInfoRegion.yPosition = (this.height - this.ySize) / 2 + 101;
+        this.electricInfoRegion.x = (this.width - this.xSize) / 2 + 107;
+        this.electricInfoRegion.y = (this.height - this.ySize) / 2 + 101;
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
@@ -71,13 +71,13 @@ public class GuiCargoUnloader extends GuiContainerGC
     {
         int offsetX = -17;
         int offsetY = 45;
-        this.fontRendererObj.drawString(this.cargoUnloader.getName(), 60, 12, 4210752);
+        this.fontRenderer.drawString(this.cargoUnloader.getName(), 60, 12, 4210752);
         this.buttonLoadItems.enabled = this.cargoUnloader.disableCooldown == 0;
         this.buttonLoadItems.displayString = !this.cargoUnloader.getDisabled(0) ? GCCoreUtil.translate("gui.button.stopunloading.name") : GCCoreUtil.translate("gui.button.unloaditems.name");
-        this.fontRendererObj.drawString(GCCoreUtil.translate("gui.message.status.name") + ": " + this.getStatus(), 28 + offsetX, 45 + 23 - 46 + offsetY, 4210752);
-        //this.fontRendererObj.drawString("" + this.cargoUnloader.storage.getMaxExtract(), 28 + offsetX, 56 + 23 - 46 + offsetY, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.cargoUnloader.getVoltage(), ElectricUnit.VOLTAGE), 28 + offsetX, 68 + 23 - 46 + offsetY, 4210752);
-        this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 90, 4210752);
+        this.fontRenderer.drawString(GCCoreUtil.translate("gui.message.status.name") + ": " + this.getStatus(), 28 + offsetX, 45 + 23 - 46 + offsetY, 4210752);
+        //this.fontRenderer.drawString("" + this.cargoUnloader.storage.getMaxExtract(), 28 + offsetX, 56 + 23 - 46 + offsetY, 4210752);
+        //		this.fontRenderer.drawString(ElectricityDisplay.getDisplay(this.cargoUnloader.getVoltage(), ElectricUnit.VOLTAGE), 28 + offsetX, 68 + 23 - 46 + offsetY, 4210752);
+        this.fontRenderer.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 90, 4210752);
     }
 
     private String getStatus()

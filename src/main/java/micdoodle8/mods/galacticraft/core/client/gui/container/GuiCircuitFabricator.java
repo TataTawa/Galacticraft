@@ -36,8 +36,8 @@ public class GuiCircuitFabricator extends GuiContainerGC
     {
         super.initGui();
         this.electricInfoRegion.tooltipStrings = new ArrayList<String>();
-        this.electricInfoRegion.xPosition = (this.width - this.xSize) / 2 + 17;
-        this.electricInfoRegion.yPosition = (this.height - this.ySize) / 2 + 88;
+        this.electricInfoRegion.x = (this.width - this.xSize) / 2 + 17;
+        this.electricInfoRegion.y = (this.height - this.ySize) / 2 + 88;
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
@@ -46,8 +46,8 @@ public class GuiCircuitFabricator extends GuiContainerGC
         batterySlotDesc.add(GCCoreUtil.translate("gui.battery_slot.desc.1"));
         this.infoRegions.add(new GuiElementInfoRegion((this.width - this.xSize) / 2 + 5, (this.height - this.ySize) / 2 + 68, 18, 18, batterySlotDesc, this.width, this.height, this));
         this.processInfoRegion.tooltipStrings = new ArrayList<String>();
-        this.processInfoRegion.xPosition = (this.width - this.xSize) / 2 + 87;
-        this.processInfoRegion.yPosition = (this.height - this.ySize) / 2 + 19;
+        this.processInfoRegion.x = (this.width - this.xSize) / 2 + 87;
+        this.processInfoRegion.y = (this.height - this.ySize) / 2 + 19;
         this.processInfoRegion.parentWidth = this.width;
         this.processInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.processInfoRegion);
@@ -56,7 +56,7 @@ public class GuiCircuitFabricator extends GuiContainerGC
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.fontRendererObj.drawString(this.tileEntity.getName(), 10, 6, 4210752);
+        this.fontRenderer.drawString(this.tileEntity.getName(), 10, 6, 4210752);
         String displayText;
 
         if (this.tileEntity.processTicks > 0)
@@ -69,13 +69,13 @@ public class GuiCircuitFabricator extends GuiContainerGC
         }
 
         String str = GCCoreUtil.translate("gui.message.status.name") + ":";
-        this.fontRendererObj.drawString(str, 115 - this.fontRendererObj.getStringWidth(str) / 2, 80, 4210752);
-        this.fontRendererObj.drawString(displayText, 115 - this.fontRendererObj.getStringWidth(displayText) / 2, 90, 4210752);
-        this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 93, 4210752);
+        this.fontRenderer.drawString(str, 115 - this.fontRenderer.getStringWidth(str) / 2, 80, 4210752);
+        this.fontRenderer.drawString(displayText, 115 - this.fontRenderer.getStringWidth(displayText) / 2, 90, 4210752);
+        this.fontRenderer.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 93, 4210752);
 //		str = "" + this.tileEntity.storage.getMaxExtract();
-//		this.fontRendererObj.drawString(str, 5, 42, 4210752);
+//		this.fontRenderer.drawString(str, 5, 42, 4210752);
 //		//		str = ElectricityDisplay.getDisplay(this.tileEntity.getVoltage(), ElectricUnit.VOLTAGE);
-//		this.fontRendererObj.drawString(str, 5, 52, 4210752);
+//		this.fontRenderer.drawString(str, 5, 52, 4210752);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+
 import io.netty.buffer.ByteBuf;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
@@ -81,6 +82,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
@@ -1183,7 +1185,7 @@ public class PacketSimple extends PacketBase implements Packet<INetHandler>
 
             if (missingObjects.length() > 0)
             {
-                playerBase.connection.disconnect("Missing Galacticraft Celestial Objects:\n\n " + missingObjects);
+                playerBase.connection.onDisconnect(new TextComponentString("Missing Galacticraft Celestial Objects:\n\n " + missingObjects));
             }
 
             break;
@@ -1237,7 +1239,7 @@ public class PacketSimple extends PacketBase implements Packet<INetHandler>
             }
             break;
         case S_REQUEST_DATA:
-            WorldServer worldServer = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension((Integer) this.data.get(0));
+            WorldServer worldServer = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld((Integer) this.data.get(0));
             if (worldServer != null)
             {
                 TileEntity requestedTile = worldServer.getTileEntity((BlockPos) this.data.get(1));

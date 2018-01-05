@@ -429,7 +429,7 @@ public class BlockMulti extends BlockAdvanced implements IPartialSealableBlock, 
 
     private static boolean hasRoomForPlayer(World worldIn, BlockPos pos)
     {
-        return worldIn.getBlockState(pos.down()).isFullyOpaque() && !worldIn.getBlockState(pos).getMaterial().isSolid() && !worldIn.getBlockState(pos.up()).getMaterial().isSolid();
+        return worldIn.getBlockState(pos.down()).isOpaqueCube() && !worldIn.getBlockState(pos).getMaterial().isSolid() && !worldIn.getBlockState(pos.up()).getMaterial().isSolid();
     }
 
     @Override

@@ -1,5 +1,11 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.world.gen;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
 import micdoodle8.mods.galacticraft.core.GCBlocks;
 import micdoodle8.mods.galacticraft.core.perlin.NoiseModule;
@@ -10,8 +16,15 @@ import micdoodle8.mods.galacticraft.planets.asteroids.ConfigManagerAsteroids;
 import micdoodle8.mods.galacticraft.planets.asteroids.blocks.AsteroidBlocks;
 import micdoodle8.mods.galacticraft.planets.asteroids.dimension.WorldProviderAsteroids;
 import micdoodle8.mods.galacticraft.planets.asteroids.world.gen.base.MapGenAbandonedBase;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockFlower.EnumFlowerType;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockOldLeaf;
+import net.minecraft.block.BlockOldLog;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -22,19 +35,13 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
-import net.minecraft.world.gen.ChunkProviderOverworld;
+import net.minecraft.world.gen.ChunkGeneratorOverworld;
 import net.minecraft.world.gen.feature.WorldGenFlowers;
 import net.minecraft.world.gen.feature.WorldGenLakes;
 import net.minecraft.world.gen.feature.WorldGenTallGrass;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
-public class ChunkProviderAsteroids extends ChunkProviderOverworld
+public class ChunkProviderAsteroids extends ChunkGeneratorOverworld
 {
     final Block ASTEROID_STONE = AsteroidBlocks.blockBasic;
     final byte ASTEROID_STONE_META_0 = 0;
@@ -531,7 +538,7 @@ public class ChunkProviderAsteroids extends ChunkProviderOverworld
     }
 
     @Override
-    public Chunk provideChunk(int par1, int par2)
+    public Chunk generateChunk(int par1, int par2)
     {
         ChunkPrimer primer = new ChunkPrimer();
 //        long time1 = System.nanoTime();
@@ -950,7 +957,7 @@ public class ChunkProviderAsteroids extends ChunkProviderOverworld
             }
         }
 
-        chunk.isModified = true;
+        chunk.setModified(true);;
     }
 
     public void resetBase()

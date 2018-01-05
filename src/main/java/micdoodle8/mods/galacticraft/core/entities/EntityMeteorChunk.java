@@ -199,13 +199,13 @@ public class EntityMeteorChunk extends Entity implements IProjectile
 
             if (movingobjectposition != null)
             {
-                vec31 = new Vec3d(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+                vec31 = new Vec3d(movingobjectposition.hitVec.x, movingobjectposition.hitVec.y, movingobjectposition.hitVec.z);
             }
 
             this.rotationPitch += 1F;
 
             Entity entity = null;
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
             int l;
             float f1;
@@ -331,9 +331,9 @@ public class EntityMeteorChunk extends Entity implements IProjectile
                     IBlockState state = this.world.getBlockState(movingobjectposition.getBlockPos());
                     this.inTile = state.getBlock();
                     this.inData = this.inTile.getMetaFromState(state);
-                    this.motionX = (float) (movingobjectposition.hitVec.xCoord - this.posX);
-                    this.motionY = (float) (movingobjectposition.hitVec.yCoord - this.posY);
-                    this.motionZ = (float) (movingobjectposition.hitVec.zCoord - this.posZ);
+                    this.motionX = (float) (movingobjectposition.hitVec.x - this.posX);
+                    this.motionY = (float) (movingobjectposition.hitVec.y - this.posY);
+                    this.motionZ = (float) (movingobjectposition.hitVec.z - this.posZ);
                     f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
                     this.posX -= this.motionX / f2 * 0.05000000074505806D;
                     this.posY -= this.motionY / f2 * 0.05000000074505806D;

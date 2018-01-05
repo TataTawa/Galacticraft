@@ -58,7 +58,7 @@ public class TileEntityBeamReceiverRenderer extends TileEntitySpecialRenderer<Ti
     }
 
     @Override
-    public void renderTileEntityAt(TileEntityBeamReceiver tile, double x, double y, double z, float partialTicks, int destroyStage)
+    public void render(TileEntityBeamReceiver tile, double x, double y, double z, float partialTickTime, int par9, float alpha)
     {
         if (tile.facing == null)
         {

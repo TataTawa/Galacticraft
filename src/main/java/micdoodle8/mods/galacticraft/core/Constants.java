@@ -11,8 +11,9 @@ public class Constants
     public static final int LOCALBUILDVERSION = 0;
     public static final String COMBINEDVERSION = LOCALMAJVERSION + "." + LOCALMINVERSION + "." + LOCALBUILDVERSION;
     
-    public static final String MCVERSION = "[1.11.2]";
-    public static final String DEPENDENCIES_FORGE = "required-after:forge@[13.20.0.2228,); required-after:FML@[8.0.99.99,); ";  //Keep the space at the end!
+    public static final String MCVERSION = "[1.12.2]";
+    public static final String DEPENDENCIES_FORGE = "required-after:forge@[14.23.0.2531,); ";  //Keep the space at the end!
+    		//"required-after:FML@[8.0.99.99,); ";  //Keep the space at the end!
     public static final String DEPENDENCIES_MICCORE = "required-after:Micdoodlecore; ";  //Keep the space at the end!
     public static final String DEPENDENCIES_MODS = "after:ic2;";
 

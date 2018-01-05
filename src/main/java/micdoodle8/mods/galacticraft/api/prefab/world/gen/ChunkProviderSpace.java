@@ -1,5 +1,8 @@
 package micdoodle8.mods.galacticraft.api.prefab.world.gen;
 
+import java.util.List;
+import java.util.Random;
+
 import micdoodle8.mods.galacticraft.api.prefab.core.BlockMetaPair;
 import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
 import micdoodle8.mods.galacticraft.core.world.gen.EnumCraterSize;
@@ -12,15 +15,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.ChunkProviderOverworld;
-
-import java.util.List;
-import java.util.Random;
+import net.minecraft.world.gen.ChunkGeneratorOverworld;
 
 /**
  * Do not include this prefab class in your released mod download.
  */
-public abstract class ChunkProviderSpace extends ChunkProviderOverworld
+public abstract class ChunkProviderSpace extends ChunkGeneratorOverworld
 {
     protected final Random rand;
 
@@ -101,8 +101,10 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
                     if (y < this.MID_HEIGHT + yDev)
                     {
                         primer.setBlockState(x, y, z, this.getStoneBlock().getBlock().getStateFromMeta(this.getStoneBlock().getMetadata()));
-//                        idArray[this.getIndex(x, y, z)] = this.getStoneBlock().getBlock();
-//                        metaArray[this.getIndex(x, y, z)] = this.getStoneBlock().getMetadata();
+                        // idArray[this.getIndex(x, y, z)] =
+                        // this.getStoneBlock().getBlock();
+                        // metaArray[this.getIndex(x, y, z)] =
+                        // this.getStoneBlock().getMetadata();
                     }
                 }
             }
@@ -114,12 +116,10 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
         if (t < 0.0)
         {
             return d1;
-        }
-        else if (t > 1.0)
+        } else if (t > 1.0)
         {
             return d2;
-        }
-        else
+        } else
         {
             return d1 + (d2 - d1) * t;
         }
@@ -144,7 +144,8 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
     }
 
     @Override
-//    public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomesIn)
+    // public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[]
+    // biomesIn)
     public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomesIn)
     {
         final int var5 = 20;
@@ -168,20 +169,19 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
                     if (var16 <= 0 + this.rand.nextInt(5))
                     {
                         primer.setBlockState(var8, var16, var9, Blocks.BEDROCK.getDefaultState());
-//                        arrayOfIDs[index] = Blocks.BEDROCK;
-                    }
-                    else
+                        // arrayOfIDs[index] = Blocks.BEDROCK;
+                    } else
                     {
-//                        final Block var18 = arrayOfIDs[index];
+                        // final Block var18 = arrayOfIDs[index];
                         Block var18 = primer.getBlockState(var8, var16, var9).getBlock();
 
                         if (Blocks.AIR == var18)
                         {
                             var13 = -1;
-                        }
-                        else if (var18 == this.getStoneBlock().getBlock())
+                        } else if (var18 == this.getStoneBlock().getBlock())
                         {
-//                            arrayOfMeta[index] = this.getStoneBlock().getMetadata();
+                            // arrayOfMeta[index] =
+                            // this.getStoneBlock().getMetadata();
 
                             if (var13 == -1)
                             {
@@ -191,8 +191,7 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
                                     var14m = 0;
                                     var15 = this.getStoneBlock().getBlock();
                                     var15m = this.getStoneBlock().getMetadata();
-                                }
-                                else if (var16 >= var5 - -16 && var16 <= var5 + 1)
+                                } else if (var16 >= var5 - -16 && var16 <= var5 + 1)
                                 {
                                     var14 = this.getGrassBlock().getBlock();
                                     var14m = this.getGrassBlock().getMetadata();
@@ -204,22 +203,20 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
 
                                 if (var16 >= var5 - 1)
                                 {
-//                                    arrayOfIDs[index] = var14;
-//                                    arrayOfMeta[index] = var14m;
+                                    // arrayOfIDs[index] = var14;
+                                    // arrayOfMeta[index] = var14m;
                                     primer.setBlockState(var8, var16, var9, var14.getStateFromMeta(var14m));
-                                }
-                                else
+                                } else
                                 {
-//                                    arrayOfIDs[index] = var15;
-//                                    arrayOfMeta[index] = var15m;
+                                    // arrayOfIDs[index] = var15;
+                                    // arrayOfMeta[index] = var15m;
                                     primer.setBlockState(var8, var16, var9, var15.getStateFromMeta(var15m));
                                 }
-                            }
-                            else if (var13 > 0)
+                            } else if (var13 > 0)
                             {
                                 --var13;
-//                                arrayOfIDs[index] = var15;
-//                                arrayOfMeta[index] = var15m;
+                                // arrayOfIDs[index] = var15;
+                                // arrayOfMeta[index] = var15m;
                                 primer.setBlockState(var8, var16, var9, var15.getStateFromMeta(var15m));
                             }
                         }
@@ -230,12 +227,12 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
     }
 
     @Override
-    public Chunk provideChunk(int x, int z)
+    public Chunk generateChunk(int x, int z)
     {
         ChunkPrimer primer = new ChunkPrimer();
         this.rand.setSeed(x * 341873128712L + z * 132897987541L);
-//        final Block[] ids = new Block[32768 * 2];
-//        final byte[] meta = new byte[32768 * 2];
+        // final Block[] ids = new Block[32768 * 2];
+        // final byte[] meta = new byte[32768 * 2];
         this.generateTerrain(x, z, primer);
         this.createCraters(x, z, primer);
         this.biomesForGeneration = this.world.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
@@ -310,8 +307,8 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
                         if (Blocks.AIR != primer.getBlockState(x, y, z).getBlock() && helper <= yDev)
                         {
                             primer.setBlockState(x, y, z, Blocks.AIR.getDefaultState());
-//                            chunkArray[this.getIndex(x, y, z)] = Blocks.AIR;
-//                            metaArray[this.getIndex(x, y, z)] = 0;
+                            // chunkArray[this.getIndex(x, y, z)] = Blocks.AIR;
+                            // metaArray[this.getIndex(x, y, z)] = 0;
                             helper++;
                         }
 
@@ -371,7 +368,7 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
      * Do not return null
      *
      * @return The biome generator for this world, handles ore, flower, etc
-     * generation. See GCBiomeDecoratorBase.
+     *         generation. See GCBiomeDecoratorBase.
      */
     protected abstract BiomeDecoratorSpace getBiomeGenerator();
 
@@ -400,7 +397,7 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
      * The grass block to be generated. Doesn't have to be grass of course.
      *
      * @return BlockMetaPair instance containing ID and metadata for grass
-     * block.
+     *         block.
      */
     protected abstract BlockMetaPair getGrassBlock();
 
@@ -415,7 +412,7 @@ public abstract class ChunkProviderSpace extends ChunkProviderOverworld
      * The stone block to be generated. Doesn't have to be stone of course.
      *
      * @return BlockMetaPair instance containing ID and metadata for stone
-     * block.
+     *         block.
      */
     protected abstract BlockMetaPair getStoneBlock();
 

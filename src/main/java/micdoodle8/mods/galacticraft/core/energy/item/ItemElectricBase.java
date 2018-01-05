@@ -1,6 +1,9 @@
 package micdoodle8.mods.galacticraft.core.energy.item;
 
-import ic2.api.item.IElectricItemManager;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import micdoodle8.mods.galacticraft.api.item.ElectricItemHelper;
 import micdoodle8.mods.galacticraft.api.item.IItemElectric;
 import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
@@ -8,6 +11,7 @@ import micdoodle8.mods.galacticraft.core.energy.EnergyDisplayHelper;
 import micdoodle8.mods.galacticraft.core.items.ItemBatteryInfinite;
 import micdoodle8.mods.galacticraft.core.util.CompatibilityManager;
 import micdoodle8.mods.miccore.Annotations.RuntimeInterface;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -20,8 +24,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
-
-import java.util.List;
 
 public abstract class ItemElectricBase extends Item implements IItemElectric
 {
@@ -39,10 +41,10 @@ public abstract class ItemElectricBase extends Item implements IItemElectric
 
         this.mcVersion = new DefaultArtifactVersion((String) FMLInjectionData.data()[4]);
 
-        if (EnergyConfigHandler.isIndustrialCraft2Loaded())
-        {
-            itemManagerIC2 = new ElectricItemManagerIC2();
-        }
+//        if (EnergyConfigHandler.isIndustrialCraft2Loaded())
+//        {
+//            itemManagerIC2 = new ElectricItemManagerIC2();
+//        }
     }
 
     protected void setMaxTransfer()
@@ -52,7 +54,7 @@ public abstract class ItemElectricBase extends Item implements IItemElectric
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List<String> tooltip, boolean par4)
+    public void addInformation(ItemStack itemStack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
         String color = "";
         float joules = this.getElectricityStored(itemStack);
@@ -178,7 +180,7 @@ public abstract class ItemElectricBase extends Item implements IItemElectric
     }
 
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
     {
         list.add(ElectricItemHelper.getUncharged(new ItemStack(this)));
         list.add(ElectricItemHelper.getWithCharge(new ItemStack(this), this.getMaxElectricityStored(new ItemStack(this))));
@@ -191,13 +193,13 @@ public abstract class ItemElectricBase extends Item implements IItemElectric
             return true;
         }
 
-        if (EnergyConfigHandler.isIndustrialCraft2Loaded())
-        {
-            if (item instanceof ic2.api.item.ISpecialElectricItem)
-            {
-                return true;
-            }
-        }
+//        if (EnergyConfigHandler.isIndustrialCraft2Loaded())
+//        {
+//            if (item instanceof ic2.api.item.ISpecialElectricItem)
+//            {
+//                return true;
+//            }
+//        }
 
         return false;
     }
@@ -215,13 +217,13 @@ public abstract class ItemElectricBase extends Item implements IItemElectric
             return ((ItemElectricBase) item).getElectricityStored(itemstack) <= 0;
         }
 
-        if (EnergyConfigHandler.isIndustrialCraft2Loaded())
-        {
-            if (item instanceof ic2.api.item.IElectricItem)
-            {
-                return !((ic2.api.item.IElectricItem) item).canProvideEnergy(itemstack);
-            }
-        }
+//        if (EnergyConfigHandler.isIndustrialCraft2Loaded())
+//        {
+//            if (item instanceof ic2.api.item.IElectricItem)
+//            {
+//                return !((ic2.api.item.IElectricItem) item).canProvideEnergy(itemstack);
+//            }
+//        }
 
         return false;
     }
@@ -291,11 +293,11 @@ public abstract class ItemElectricBase extends Item implements IItemElectric
 
     // All the following methods are for IC2 compatibility
 
-    @RuntimeInterface(clazz = "ic2.api.item.ISpecialElectricItem", modID = CompatibilityManager.modidIC2)
-    public IElectricItemManager getManager(ItemStack itemstack)
-    {
-        return (IElectricItemManager) ItemElectricBase.itemManagerIC2;
-    }
+//    @RuntimeInterface(clazz = "ic2.api.item.ISpecialElectricItem", modID = CompatibilityManager.modidIC2)
+//    public IElectricItemManager getManager(ItemStack itemstack)
+//    {
+//        return (IElectricItemManager) ItemElectricBase.itemManagerIC2;
+//    }
 
     @RuntimeInterface(clazz = "ic2.api.item.ISpecialElectricItem", modID = CompatibilityManager.modidIC2)
     public boolean canProvideEnergy(ItemStack itemStack)

@@ -57,14 +57,14 @@ public class GuiMethaneSynthesizer extends GuiContainerGC
         int edgeLeft = (this.width - this.xSize) / 2;
         int edgeTop = (this.height - this.ySize) / 2;
 
-        this.gasTankRegion.xPosition = edgeLeft + 7;
-        this.gasTankRegion.yPosition = edgeTop + 28;
+        this.gasTankRegion.x = edgeLeft + 7;
+        this.gasTankRegion.y = edgeTop + 28;
         this.gasTankRegion.parentWidth = this.width;
         this.gasTankRegion.parentHeight = this.height;
         this.infoRegions.add(this.gasTankRegion);
 
-        this.gasTank2Region.xPosition = edgeLeft + 28;
-        this.gasTank2Region.yPosition = edgeTop + 28;
+        this.gasTank2Region.x = edgeLeft + 28;
+        this.gasTank2Region.y = edgeTop + 28;
         this.gasTank2Region.parentWidth = this.width;
         this.gasTank2Region.parentHeight = this.height;
         this.infoRegions.add(this.gasTank2Region);
@@ -78,8 +78,8 @@ public class GuiMethaneSynthesizer extends GuiContainerGC
         this.infoRegions.add(new GuiElementInfoRegion(edgeLeft + 27, edgeTop + 53, 18, 18, carbonSlotDesc, this.width, this.height, this));
 
 
-        this.fuelTankRegion.xPosition = edgeLeft + 153;
-        this.fuelTankRegion.yPosition = edgeTop + 28;
+        this.fuelTankRegion.x = edgeLeft + 153;
+        this.fuelTankRegion.y = edgeTop + 28;
         this.fuelTankRegion.parentWidth = this.width;
         this.fuelTankRegion.parentHeight = this.height;
         this.infoRegions.add(this.fuelTankRegion);
@@ -106,8 +106,8 @@ public class GuiMethaneSynthesizer extends GuiContainerGC
         fuelSlotDesc.add(GCCoreUtil.translate("gui.message.with_atmosphere1.name") + ")");
         this.infoRegions.add(new GuiElementInfoRegion(edgeLeft + 27, edgeTop + 6, 18, 18, fuelSlotDesc, this.width, this.height, this));
 
-        this.electricInfoRegion.xPosition = edgeLeft + 66;
-        this.electricInfoRegion.yPosition = edgeTop + 16;
+        this.electricInfoRegion.x = edgeLeft + 66;
+        this.electricInfoRegion.y = edgeTop + 16;
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
         this.infoRegions.add(this.electricInfoRegion);
@@ -131,7 +131,7 @@ public class GuiMethaneSynthesizer extends GuiContainerGC
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
-        this.fontRendererObj.drawString(this.tileEntity.getName(), 47, 5, 4210752);
+        this.fontRenderer.drawString(this.tileEntity.getName(), 47, 5, 4210752);
         String displayText = "";
         int yOffset = -18;
 
@@ -166,11 +166,11 @@ public class GuiMethaneSynthesizer extends GuiContainerGC
 
         this.buttonDisable.enabled = this.tileEntity.disableCooldown == 0;
         this.buttonDisable.displayString = this.tileEntity.processTicks <= -8 ? GCCoreUtil.translate("gui.button.liquefy.name") : GCCoreUtil.translate("gui.button.liquefy_stop.name");
-        this.fontRendererObj.drawString(GCCoreUtil.translate("gui.message.status.name") + ":", 72, 45 + 23 + yOffset, 4210752);
-        this.fontRendererObj.drawString(displayText, 75, 45 + 33 + yOffset, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.tileEntity.ueWattsPerTick * 20, ElectricUnit.WATT), 72, 56 + 23 + yOffset, 4210752);
-        //		this.fontRendererObj.drawString(ElectricityDisplay.getDisplay(this.tileEntity.getVoltage(), ElectricUnit.VOLTAGE), 72, 68 + 23 + yOffset, 4210752);
-        this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 118 + 2 + 23, 4210752);
+        this.fontRenderer.drawString(GCCoreUtil.translate("gui.message.status.name") + ":", 72, 45 + 23 + yOffset, 4210752);
+        this.fontRenderer.drawString(displayText, 75, 45 + 33 + yOffset, 4210752);
+        //		this.fontRenderer.drawString(ElectricityDisplay.getDisplay(this.tileEntity.ueWattsPerTick * 20, ElectricUnit.WATT), 72, 56 + 23 + yOffset, 4210752);
+        //		this.fontRenderer.drawString(ElectricityDisplay.getDisplay(this.tileEntity.getVoltage(), ElectricUnit.VOLTAGE), 72, 68 + 23 + yOffset, 4210752);
+        this.fontRenderer.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 118 + 2 + 23, 4210752);
     }
 
     @Override

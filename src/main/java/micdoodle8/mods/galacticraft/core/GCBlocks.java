@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.ObjectArrays;
 import com.google.common.collect.Ordering;
+
 import micdoodle8.mods.galacticraft.core.blocks.*;
 import micdoodle8.mods.galacticraft.core.blocks.BlockSpaceGlass.GlassFrame;
 import micdoodle8.mods.galacticraft.core.blocks.BlockSpaceGlass.GlassType;
@@ -25,6 +26,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -324,6 +326,15 @@ public class GCBlocks
         setHarvestLevel(GCBlocks.blockMoon, "pickaxe", 3, 14); //Moon dungeon brick (actually unharvestable)
     }
 
+    
+    public static ArrayList<Block> blocks = new ArrayList<Block>();
+    
+    public static void registerBlocks(IForgeRegistry<Block> registry)
+    {
+        Block[] itemsArray = (Block[]) blocks.toArray();
+        registry.registerAll(itemsArray);
+    }
+    
     public static void registerBlock(Block block, Class<? extends ItemBlock> itemClass, Object... itemCtorArgs)
     {
         String name = block.getUnlocalizedName().substring(5);
@@ -332,7 +343,7 @@ public class GCBlocks
         {
             block.setRegistryName(name);
         }
-        GameRegistry.register(block);
+        blocks.add(block);
         ItemBlock item = null;
 
         if (itemClass != null)
@@ -356,7 +367,7 @@ public class GCBlocks
 
             if (item != null)
             {
-                GameRegistry.register(item.setRegistryName(name));
+            	GCItems.items.add(item);
             }
         }
 
@@ -380,7 +391,7 @@ public class GCBlocks
                 return;
             }
             registeringSorted = true;
-            block.getSubBlocks(item, null, blocks);
+            block.getSubBlocks(null, blocks);
             registeringSorted = false;
             for (ItemStack stack : blocks)
             {

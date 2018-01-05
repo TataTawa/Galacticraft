@@ -186,7 +186,7 @@ public class MapUtil
             return;
         }
 
-        File baseFolder = new File(overworld.getMinecraftServer().worldServerForDimension(0).getChunkSaveLocation(), "galacticraft/overworldMap");
+        File baseFolder = new File(overworld.getMinecraftServer().getWorld(0).getChunkSaveLocation(), "galacticraft/overworldMap");
         if (!baseFolder.exists() && !baseFolder.mkdirs())
         {
             GCLog.severe("Base folder(s) could not be created: " + baseFolder.getAbsolutePath());
@@ -210,7 +210,7 @@ public class MapUtil
         {
             try
             {
-                File baseFolder = new File(client.world.getMinecraftServer().worldServerForDimension(0).getChunkSaveLocation(), "galacticraft/overworldMap");
+                File baseFolder = new File(client.world.getMinecraftServer().getWorld(0).getChunkSaveLocation(), "galacticraft/overworldMap");
                 if (!baseFolder.exists())
                 {
                     GCLog.severe("Base folder missing: " + baseFolder.getAbsolutePath());
@@ -246,7 +246,7 @@ public class MapUtil
         
         try
         {
-            File baseFolder = new File(client.world.getMinecraftServer().worldServerForDimension(0).getChunkSaveLocation(), "galacticraft/overworldMap");
+            File baseFolder = new File(client.world.getMinecraftServer().getWorld(0).getChunkSaveLocation(), "galacticraft/overworldMap");
             if (!baseFolder.exists())
             {
                 GCLog.severe("Base folder missing: " + baseFolder.getAbsolutePath());
@@ -347,7 +347,7 @@ public class MapUtil
             return false;
         }
 
-        File baseFolder = new File(world.getMinecraftServer().worldServerForDimension(0).getChunkSaveLocation(), "galacticraft/overworldMap");
+        File baseFolder = new File(world.getMinecraftServer().getWorld(0).getChunkSaveLocation(), "galacticraft/overworldMap");
         if (!baseFolder.exists() && !baseFolder.mkdirs())
         {
             GCLog.severe("Base folder(s) could not be created: " + baseFolder.getAbsolutePath());
@@ -1225,7 +1225,7 @@ public class MapUtil
         {
             for (int z0 = -12; z0 <= 12; z0++)
             {
-                Chunk chunk = FMLCommonHandler.instance().getMinecraftServerInstance().worldServerForDimension(dim).getChunkFromChunkCoords(chunkXPos + x0, chunkZPos + z0);
+                Chunk chunk = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(dim).getChunkFromChunkCoords(chunkXPos + x0, chunkZPos + z0);
 
                 if (chunk != null)
                 {

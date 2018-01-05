@@ -1,5 +1,7 @@
 package micdoodle8.mods.galacticraft.core.dimension;
 
+import java.util.ArrayList;
+
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.Satellite;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
@@ -13,10 +15,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSavedData;
+import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.DimensionManager;
-
-import java.util.ArrayList;
 
 public class SpaceStationWorldData extends WorldSavedData
 {
@@ -30,7 +30,7 @@ public class SpaceStationWorldData extends WorldSavedData
     private NBTTagCompound dataCompound;
 
     public SpaceStationWorldData(String par1Str)
-    {
+ {
         super(par1Str);
 
         this.allowedPlayers = new ArrayList<String>()

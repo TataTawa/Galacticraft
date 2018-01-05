@@ -1,7 +1,7 @@
 package micdoodle8.mods.galacticraft.core.client.render.tile;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Maps;
+import java.util.HashMap;
+
 import micdoodle8.mods.galacticraft.api.transmission.tile.IBufferTransmitter;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GCBlocks;
@@ -10,7 +10,11 @@ import micdoodle8.mods.galacticraft.core.tile.TileEntityFluidPipe;
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.util.OxygenUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GLAllocation;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -22,58 +26,48 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fluids.Fluid;
+
 import org.lwjgl.opengl.GL11;
 
-import java.util.HashMap;
+import com.google.common.base.Function;
+import com.google.common.collect.Maps;
 
-public class TileEntityFluidPipeRenderer extends TileEntitySpecialRenderer<TileEntityFluidPipe>
-{
+public class TileEntityFluidPipeRenderer extends TileEntitySpecialRenderer<TileEntityFluidPipe> {
     private static HashMap<Integer, HashMap<Fluid, Integer[]>> cache = new HashMap<>();
     private static IBakedModel[] pullConnectorModel = new IBakedModel[6];
 
     private final int stages = 100;
 
-    private void updateModels()
-    {
-        if (pullConnectorModel[0] == null)
-        {
-            try
-            {
-                for (EnumFacing facing : EnumFacing.VALUES)
-                {
+    private void updateModels() {
+        if (pullConnectorModel[0] == null) {
+            try {
+                for (EnumFacing facing : EnumFacing.VALUES) {
                     // Get the first character of the direction name (n/e/s/w/u/d)
                     Character c = Character.toLowerCase(facing.getName().charAt(0));
                     IModel model = ModelLoaderRegistry.getModel(new ResourceLocation(Constants.ASSET_PREFIX, "block/fluid_pipe_pull_" + c));
                     Function<ResourceLocation, TextureAtlasSprite> spriteFunction = (ResourceLocation location) -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
                     pullConnectorModel[facing.ordinal()] = model.bake(model.getDefaultState(), DefaultVertexFormats.ITEM, spriteFunction);
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
     }
 
     @Override
-    public void renderTileEntityAt(TileEntityFluidPipe pipe, double x, double y, double z, float partialTicks, int destroyStage)
-    {
+    public void render(TileEntityFluidPipe pipe, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         updateModels();
 
-        if (pipe.getBlockType() == GCBlocks.oxygenPipePull)
-        {
+        if (pipe.getBlockType() == GCBlocks.oxygenPipePull) {
             GL11.glPushMatrix();
 
             GL11.glTranslatef((float) x, (float) y, (float) z);
 
             RenderHelper.disableStandardItemLighting();
             this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-            if (Minecraft.isAmbientOcclusionEnabled())
-            {
+            if (Minecraft.isAmbientOcclusionEnabled()) {
                 GlStateManager.shadeModel(GL11.GL_SMOOTH);
-            }
-            else
-            {
+            } else {
                 GlStateManager.shadeModel(GL11.GL_FLAT);
             }
 
@@ -81,12 +75,10 @@ public class TileEntityFluidPipeRenderer extends TileEntitySpecialRenderer<TileE
 
             TileEntity[] adj = OxygenUtil.getAdjacentFluidConnections(pipe);
 
-            for (EnumFacing facing : EnumFacing.VALUES)
-            {
+            for (EnumFacing facing : EnumFacing.VALUES) {
                 TileEntity sideTile = adj[facing.ordinal()];
 
-                if (sideTile != null && !(sideTile instanceof IBufferTransmitter))
-                {
+                if (sideTile != null && !(sideTile instanceof IBufferTransmitter)) {
                     GL11.glPushMatrix();
                     ClientUtil.drawBakedModel(pullConnectorModel[facing.ordinal()]);
                     GL11.glPopMatrix();
@@ -98,35 +90,27 @@ public class TileEntityFluidPipeRenderer extends TileEntitySpecialRenderer<TileE
 
         float scale;
 
-        if (pipe.hasNetwork())
-        {
+        if (pipe.hasNetwork()) {
             FluidNetwork network = (FluidNetwork) pipe.getNetwork();
             scale = network.fluidScale;
-        }
-        else
-        {
+        } else {
             scale = pipe.buffer.getFluidAmount() / (float) pipe.buffer.getCapacity();
         }
 
         Fluid fluid;
 
-        if (pipe.hasNetwork())
-        {
+        if (pipe.hasNetwork()) {
             FluidNetwork network = (FluidNetwork) pipe.getNetwork();
             fluid = network.refFluid;
-        }
-        else
-        {
+        } else {
             fluid = pipe.getBuffer() == null ? null : pipe.getBuffer().getFluid();
         }
 
-        if (fluid == null)
-        {
+        if (fluid == null) {
             return;
         }
 
-        if (scale > 0.01)
-        {
+        if (scale > 0.01) {
             this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
             GL11.glPushMatrix();
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -143,8 +127,7 @@ public class TileEntityFluidPipeRenderer extends TileEntitySpecialRenderer<TileE
 
             boolean gas = fluid.isGaseous();
 
-            if (gas)
-            {
+            if (gas) {
                 opacity = scale;
             }
 
@@ -152,22 +135,16 @@ public class TileEntityFluidPipeRenderer extends TileEntitySpecialRenderer<TileE
 
             TileEntity[] connections = OxygenUtil.getAdjacentFluidConnections(pipe);
 
-            for (EnumFacing side : EnumFacing.VALUES)
-            {
+            for (EnumFacing side : EnumFacing.VALUES) {
                 TileEntity sideTile = connections[side.ordinal()];
-                if (sideTile != null)
-                {
+                if (sideTile != null) {
                     Integer[] displayLists = getListAndRender(side, fluid);
 
-                    if (displayLists != null)
-                    {
-                        if (!gas)
-                        {
+                    if (displayLists != null) {
+                        if (!gas) {
                             Integer list = displayLists[Math.max(3, (int) (scale * (stages - 1)))];
                             GL11.glCallList(list);
-                        }
-                        else
-                        {
+                        } else {
                             Integer list = displayLists[stages - 1];
                             GL11.glCallList(list);
                         }
@@ -177,15 +154,11 @@ public class TileEntityFluidPipeRenderer extends TileEntitySpecialRenderer<TileE
 
             Integer[] displayLists = getListAndRender(null, fluid);
 
-            if (displayLists != null)
-            {
-                if (!gas)
-                {
+            if (displayLists != null) {
+                if (!gas) {
                     Integer list = displayLists[Math.max(3, (int) (scale * (stages - 1)))];
                     GL11.glCallList(list);
-                }
-                else
-                {
+                } else {
                     Integer list = displayLists[stages - 1];
                     GL11.glCallList(list);
                 }
@@ -199,18 +172,15 @@ public class TileEntityFluidPipeRenderer extends TileEntitySpecialRenderer<TileE
         }
     }
 
-    private Integer[] getListAndRender(EnumFacing side, Fluid fluid)
-    {
-        if (fluid == null)
-        {
+    private Integer[] getListAndRender(EnumFacing side, Fluid fluid) {
+        if (fluid == null) {
             return null;
         }
 
         TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluid.getStill().toString());
         int sideIndex = side == null ? 6 : side.ordinal();
 
-        if (cache.containsKey(sideIndex) && cache.get(sideIndex).containsKey(fluid))
-        {
+        if (cache.containsKey(sideIndex) && cache.get(sideIndex).containsKey(fluid)) {
             return cache.get(sideIndex).get(fluid);
         }
 
@@ -225,26 +195,21 @@ public class TileEntityFluidPipeRenderer extends TileEntitySpecialRenderer<TileE
 
         Integer[] displayLists = new Integer[this.stages];
 
-        if (cache.containsKey(sideIndex))
-        {
+        if (cache.containsKey(sideIndex)) {
             cache.get(sideIndex).put(fluid, displayLists);
-        }
-        else
-        {
+        } else {
             HashMap<Fluid, Integer[]> map = Maps.newHashMap();
             map.put(fluid, displayLists);
             cache.put(sideIndex, map);
         }
 
-        for (int i = 0; i < stages; ++i)
-        {
+        for (int i = 0; i < stages; ++i) {
             displayLists[i] = GLAllocation.generateDisplayLists(1);
             GL11.glNewList(displayLists[i], GL11.GL_COMPILE);
 
             float level = (i / (float) stages);
 
-            switch (sideIndex)
-            {
+            switch (sideIndex) {
             case 0:
                 minX = mid - level * size;
                 maxX = mid + level * size;
@@ -310,15 +275,14 @@ public class TileEntityFluidPipeRenderer extends TileEntitySpecialRenderer<TileE
         return displayLists;
     }
 
-    private void renderBox(float minX, float maxX, float minY, float maxY, float minZ, float maxZ, float level, TextureAtlasSprite sprite)
-    {
+    private void renderBox(float minX, float maxX, float minY, float maxY, float minZ, float maxZ, float level, TextureAtlasSprite sprite) {
         final double uMin = sprite.getMinU();
         final double uMax = sprite.getMaxU();
         final double vMin = sprite.getMinV();
         final double vMax = sprite.getMaxV();
 
         Tessellator tess = Tessellator.getInstance();
-        VertexBuffer worldRenderer = tess.getBuffer();
+        BufferBuilder worldRenderer = tess.getBuffer();
 
         double uDiff = (uMax - uMin);
         double vDiff = (vMax - vMin);

@@ -177,7 +177,7 @@ public class EntityGrapple extends Entity implements IProjectile
                 EntityPlayer shootingEntity = this.getShootingEntity();
                 if (shootingEntity != null)
                 {
-                    double deltaPosition = this.getDistanceSqToEntity(shootingEntity);
+                    double deltaPosition = this.getDistanceSq(shootingEntity);
 
                     Vector3 mot = new Vector3(shootingEntity.motionX, shootingEntity.motionY, shootingEntity.motionZ);
 
@@ -294,7 +294,7 @@ public class EntityGrapple extends Entity implements IProjectile
                 this.updatePullingEntity(false);
             }
 
-            if (this.shootingEntity != null && this.getDistanceSqToEntity(this.shootingEntity) >= 40 * 40)
+            if (this.shootingEntity != null && this.getDistanceSq(this.shootingEntity) >= 40 * 40)
             {
                 this.setDead();
             }
@@ -307,11 +307,11 @@ public class EntityGrapple extends Entity implements IProjectile
 
             if (movingobjectposition != null)
             {
-                vec3 = new Vec3d(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+                vec3 = new Vec3d(movingobjectposition.hitVec.x, movingobjectposition.hitVec.y, movingobjectposition.hitVec.z);
             }
 
             Entity entity = null;
-            List list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+            List list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
             int i;
             float f1;
@@ -364,9 +364,9 @@ public class EntityGrapple extends Entity implements IProjectile
                     IBlockState state = this.world.getBlockState(this.hitVec);
                     this.hitBlock = state.getBlock();
                     this.inData = state.getBlock().getMetaFromState(state);
-                    this.motionX = (float) (movingobjectposition.hitVec.xCoord - this.posX);
-                    this.motionY = (float) (movingobjectposition.hitVec.yCoord - this.posY);
-                    this.motionZ = (float) (movingobjectposition.hitVec.zCoord - this.posZ);
+                    this.motionX = (float) (movingobjectposition.hitVec.x - this.posX);
+                    this.motionY = (float) (movingobjectposition.hitVec.y - this.posY);
+                    this.motionZ = (float) (movingobjectposition.hitVec.z - this.posZ);
                     motion = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
                     this.posX -= this.motionX / motion * 0.05000000074505806D;
                     this.posY -= this.motionY / motion * 0.05000000074505806D;

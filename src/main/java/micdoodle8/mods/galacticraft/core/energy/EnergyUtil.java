@@ -1,14 +1,19 @@
 package micdoodle8.mods.galacticraft.core.energy;
 
-import cofh.api.energy.IEnergyConnection;
-import cofh.api.energy.IEnergyContainerItem;
-import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyProvider;
-import cofh.api.energy.IEnergyReceiver;
 import ic2.api.energy.EnergyNet;
-import ic2.api.energy.tile.*;
+import ic2.api.energy.tile.IEnergyAcceptor;
+import ic2.api.energy.tile.IEnergyConductor;
+import ic2.api.energy.tile.IEnergyEmitter;
+import ic2.api.energy.tile.IEnergySink;
+import ic2.api.energy.tile.IEnergyTile;
 import ic2.api.item.IElectricItem;
 import ic2.api.item.ISpecialElectricItem;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Set;
+
 import mekanism.api.energy.IEnergizedItem;
 import mekanism.api.energy.IStrictEnergyAcceptor;
 import mekanism.api.energy.IStrictEnergyOutputter;
@@ -29,16 +34,17 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Set;
+import appeng.api.networking.energy.IEnergySource;
+import cofh.api.energy.IEnergyConnection;
+import cofh.api.energy.IEnergyContainerItem;
+import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyProvider;
+import cofh.api.energy.IEnergyReceiver;
 
 public class EnergyUtil
 {
@@ -452,7 +458,8 @@ public class EnergyUtil
 //          GCLog.debug("Beam/storage offering RF2 up to " + toSend + " into pipe, it accepted " + sent);
             return sent;
         }
-        else if (!EnergyConfigHandler.disableFEOutput && hasCapability(tileAdj, net.minecraftforge.energy.CapabilityEnergy.ENERGY, inputAdj))
+        //else 
+        	if (!EnergyConfigHandler.disableFEOutput && hasCapability(tileAdj, net.minecraftforge.energy.CapabilityEnergy.ENERGY, inputAdj))
         {
             net.minecraftforge.energy.IEnergyStorage forgeEnergy = getCapability(tileAdj, net.minecraftforge.energy.CapabilityEnergy.ENERGY, inputAdj);
             if (forgeEnergy.canReceive())
@@ -514,7 +521,8 @@ public class EnergyUtil
             float sent = ((IEnergyProvider) tileAdj).extractEnergy(inputAdj, (int) Math.floor(toPull * EnergyConfigHandler.TO_RF_RATIO), simulate) / EnergyConfigHandler.TO_RF_RATIO;
             return sent;
         }
-        else if (!EnergyConfigHandler.disableFEInput && hasCapability(tileAdj, net.minecraftforge.energy.CapabilityEnergy.ENERGY, inputAdj))
+        //else 
+        	if (!EnergyConfigHandler.disableFEInput && hasCapability(tileAdj, net.minecraftforge.energy.CapabilityEnergy.ENERGY, inputAdj))
         {
             net.minecraftforge.energy.IEnergyStorage forgeEnergy = getCapability(tileAdj, net.minecraftforge.energy.CapabilityEnergy.ENERGY, inputAdj);
             if (forgeEnergy.canExtract())

@@ -56,7 +56,7 @@ public class EntityFlag extends Entity
     @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
-        boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
+        boolean flag = par1DamageSource.getTrueSource() instanceof EntityPlayer && ((EntityPlayer) par1DamageSource.getTrueSource()).capabilities.isCreativeMode;
 
         if (!this.world.isRemote && !this.isDead && !this.indestructable)
         {
@@ -70,7 +70,7 @@ public class EntityFlag extends Entity
                 this.setDamage(this.getDamage() + par2 * 10);
                 this.world.playSound(null, this.posX, this.posY, this.posZ, SoundType.METAL.getBreakSound(), SoundCategory.BLOCKS, SoundType.METAL.getVolume(), SoundType.METAL.getPitch() + 1.0F);
 
-                if (par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode)
+                if (par1DamageSource.getTrueSource() instanceof EntityPlayer && ((EntityPlayer) par1DamageSource.getTrueSource()).capabilities.isCreativeMode)
                 {
                     this.setDamage(100.0F);
                 }
@@ -188,7 +188,7 @@ public class EntityFlag extends Entity
 
         if ((this.ticksExisted - 1) % 20 == 0 && this.world.isRemote)
         {
-            this.flagData = ClientUtil.updateFlagData(this.getOwner(), Minecraft.getMinecraft().player.getDistanceToEntity(this) < 50.0D);
+            this.flagData = ClientUtil.updateFlagData(this.getOwner(), Minecraft.getMinecraft().player.getDistance(this) < 50.0D);
         }
 
         Vector3 vec = new Vector3(this.posX, this.posY, this.posZ);

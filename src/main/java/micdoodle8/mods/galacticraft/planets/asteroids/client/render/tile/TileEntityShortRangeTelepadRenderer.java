@@ -47,7 +47,7 @@ public class TileEntityShortRangeTelepadRenderer extends TileEntitySpecialRender
     }
 
     @Override
-    public void renderTileEntityAt(TileEntityShortRangeTelepad te, double x, double y, double z, float partialTicks, int destroyStage)
+    public void render(TileEntityShortRangeTelepad te, double x, double y, double z, float partialTickTime, int par9, float alpha)
     {
         GL11.glPushMatrix();
 

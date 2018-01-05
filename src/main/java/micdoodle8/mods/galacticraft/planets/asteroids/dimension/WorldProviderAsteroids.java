@@ -1,5 +1,9 @@
 package micdoodle8.mods.galacticraft.planets.asteroids.dimension;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.TreeMap;
+
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.api.vector.BlockVec3;
@@ -19,13 +23,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.BiomeProvider;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.TreeMap;
 
 public class WorldProviderAsteroids extends WorldProviderSpace implements ISolarLevel
 {
@@ -414,7 +414,7 @@ public class WorldProviderAsteroids extends WorldProviderSpace implements ISolar
     protected void init()
     {
         super.init();
-        this.hasNoSky = true;
+        this.hasSkyLight = true;
     }
 
     @Override

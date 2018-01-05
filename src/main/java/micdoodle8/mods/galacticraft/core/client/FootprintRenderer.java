@@ -1,31 +1,30 @@
 package micdoodle8.mods.galacticraft.core.client;
 
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
-import micdoodle8.mods.galacticraft.core.Constants;
-import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
-import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import org.lwjgl.opengl.GL11;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class FootprintRenderer
-{
+import micdoodle8.mods.galacticraft.api.vector.Vector3;
+import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.wrappers.Footprint;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.FMLClientHandler;
+
+import org.lwjgl.opengl.GL11;
+
+public class FootprintRenderer {
     public static Map<Long, List<Footprint>> footprints = new ConcurrentHashMap<Long, List<Footprint>>();
     private static final ResourceLocation footprintTexture = new ResourceLocation(Constants.ASSET_PREFIX, "textures/misc/footprint.png");
 
-    public static void renderFootprints(EntityPlayer player, float partialTicks)
-    {
+    public static void renderFootprints(EntityPlayer player, float partialTicks) {
         GL11.glPushMatrix();
         double interpPosX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
         double interpPosY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
@@ -49,15 +48,12 @@ public class FootprintRenderer
         float f10 = 0.4F;
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 
-        for (List<Footprint> footprintList : footprints.values())
-        {
-            for (Footprint footprint : footprintList)
-            {
-                if (footprint.dimension == GCCoreUtil.getDimensionID(player.world))
-                {
+        for (List<Footprint> footprintList : footprints.values()) {
+            for (Footprint footprint : footprintList) {
+                if (footprint.dimension == GCCoreUtil.getDimensionID(player.world)) {
                     GL11.glPushMatrix();
                     float ageScale = footprint.age / (float) Footprint.MAX_AGE;
-                    VertexBuffer worldRenderer = tessellator.getBuffer();
+                    BufferBuilder worldRenderer = tessellator.getBuffer();
                     worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
                     float f11 = (float) (footprint.position.x - interpPosX);
@@ -67,7 +63,7 @@ public class FootprintRenderer
                     GL11.glTranslatef(f11, f12, f13);
 
                     int brightness = (int) (100 + ageScale * 155);
-//                    worldRenderer.putBrightness4(brightness, brightness, brightness, brightness);
+                    // worldRenderer.putBrightness4(brightness, brightness, brightness, brightness);
                     GL11.glColor4f(1 - ageScale, 1 - ageScale, 1 - ageScale, 1 - ageScale);
                     double footprintScale = 0.5F;
                     worldRenderer.pos(Math.sin((45 - footprint.rotation) / Constants.RADIANS_TO_DEGREES_D) * footprintScale, 0, Math.cos((45 - footprint.rotation) / Constants.RADIANS_TO_DEGREES_D) * footprintScale).tex(f7, f9).endVertex();
@@ -86,12 +82,10 @@ public class FootprintRenderer
         GL11.glPopMatrix();
     }
 
-    public static void addFootprint(long chunkKey, Footprint footprint)
-    {
+    public static void addFootprint(long chunkKey, Footprint footprint) {
         List<Footprint> footprintList = footprints.get(chunkKey);
 
-        if (footprintList == null)
-        {
+        if (footprintList == null) {
             footprintList = new ArrayList<Footprint>();
         }
 
@@ -99,26 +93,21 @@ public class FootprintRenderer
         footprints.put(chunkKey, footprintList);
     }
 
-    public static void addFootprint(long chunkKey, int dimension, Vector3 position, float rotation, String owner)
-    {
+    public static void addFootprint(long chunkKey, int dimension, Vector3 position, float rotation, String owner) {
         addFootprint(chunkKey, new Footprint(dimension, position, rotation, owner));
     }
 
-    public static void setFootprints(long chunkKey, List<Footprint> prints)
-    {
+    public static void setFootprints(long chunkKey, List<Footprint> prints) {
         List<Footprint> footprintList = footprints.get(chunkKey);
 
-        if (footprintList == null)
-        {
+        if (footprintList == null) {
             footprintList = new ArrayList<Footprint>();
         }
 
         Iterator<Footprint> i = footprintList.iterator();
-        while (i.hasNext())
-        {
+        while (i.hasNext()) {
             Footprint print = i.next();
-            if (!print.owner.equals(FMLClientHandler.instance().getClient().player.getName()))
-            {
+            if (!print.owner.equals(FMLClientHandler.instance().getClient().player.getName())) {
                 i.remove();
             }
         }

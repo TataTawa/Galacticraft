@@ -50,7 +50,7 @@ public class TileEntityMinerBaseRenderer extends TileEntitySpecialRenderer<TileE
     }
 
     @Override
-    public void renderTileEntityAt(TileEntityMinerBase tile, double x, double y, double z, float partialTicks, int destroyStage)
+    public void render(TileEntityMinerBase tile, double x, double y, double z, float partialTickTime, int par9, float alpha)
     {
         if (!tile.isMaster)
         {

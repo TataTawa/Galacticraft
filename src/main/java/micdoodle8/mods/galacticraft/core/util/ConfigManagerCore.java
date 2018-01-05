@@ -1,6 +1,13 @@
 package micdoodle8.mods.galacticraft.core.util;
 
-import com.google.common.primitives.Ints;
+import static net.minecraftforge.common.config.Configuration.CATEGORY_GENERAL;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import micdoodle8.mods.galacticraft.api.vector.BlockTuple;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
@@ -18,18 +25,13 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.client.config.IConfigElement;
 import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.common.registry.GameData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.GameData;
+
 import org.lwjgl.input.Keyboard;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static net.minecraftforge.common.config.Configuration.CATEGORY_GENERAL;
+import com.google.common.primitives.Ints;
 
 public class ConfigManagerCore
 {
@@ -803,7 +805,7 @@ public class ConfigManagerCore
             Item item = (Item) Item.REGISTRY.getObject(new ResourceLocation(name));
             if (item instanceof ItemBlock)
             {
-                block = ((ItemBlock) item).block;
+                block = ((ItemBlock) item).getBlock();
             }
             if (block == null)
             {

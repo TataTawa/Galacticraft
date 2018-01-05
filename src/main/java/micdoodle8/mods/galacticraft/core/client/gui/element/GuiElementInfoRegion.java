@@ -18,8 +18,8 @@ public class GuiElementInfoRegion extends Gui
 {
     protected int width;
     protected int height;
-    public int xPosition;
-    public int yPosition;
+    public int x;
+    public int y;
     public boolean enabled;
     public boolean drawRegion;
     public boolean withinRegion;
@@ -33,8 +33,8 @@ public class GuiElementInfoRegion extends Gui
         this.width = 200;
         this.height = 20;
         this.enabled = true;
-        this.xPosition = xPos;
-        this.yPosition = yPos;
+        this.x = xPos;
+        this.y = yPos;
         this.width = width;
         this.height = height;
         this.tooltipStrings = tooltipStrings;
@@ -66,13 +66,13 @@ public class GuiElementInfoRegion extends Gui
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
 
-        this.withinRegion = par2 >= this.xPosition && par3 >= this.yPosition && par2 < this.xPosition + this.width && par3 < this.yPosition + this.height;
+        this.withinRegion = par2 >= this.x && par3 >= this.y && par2 < this.x + this.width && par3 < this.y + this.height;
 
         if (this.drawRegion)
         {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             int k = this.getHoverState(this.withinRegion);
-            Gui.drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, ColorUtil.to32BitColor(100 * k, 255, 0, 0));
+            Gui.drawRect(this.x, this.y, this.x + this.width, this.y + this.height, ColorUtil.to32BitColor(100 * k, 255, 0, 0));
         }
 
         if (this.tooltipStrings != null && !this.tooltipStrings.isEmpty() && this.withinRegion)
@@ -83,7 +83,7 @@ public class GuiElementInfoRegion extends Gui
             while (iterator.hasNext())
             {
                 String s = iterator.next();
-                int l = FMLClientHandler.instance().getClient().fontRendererObj.getStringWidth(s);
+                int l = FMLClientHandler.instance().getClient().fontRenderer.getStringWidth(s);
 
                 if (l > k)
                 {
@@ -128,7 +128,7 @@ public class GuiElementInfoRegion extends Gui
             for (int k2 = 0; k2 < this.tooltipStrings.size(); ++k2)
             {
                 String s1 = this.tooltipStrings.get(k2);
-                FMLClientHandler.instance().getClient().fontRendererObj.drawStringWithShadow(s1, i1, j1, -1);
+                FMLClientHandler.instance().getClient().fontRenderer.drawStringWithShadow(s1, i1, j1, -1);
 
                 j1 += 10;
             }

@@ -1,34 +1,70 @@
 package micdoodle8.mods.galacticraft.core;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Ordering;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-import mezz.jei.api.IItemBlacklist;
-import micdoodle8.mods.galacticraft.core.items.*;
+import scala.actors.threadpool.Arrays;
+import micdoodle8.mods.galacticraft.core.items.ISortableItem;
+import micdoodle8.mods.galacticraft.core.items.ItemArmorGC;
+import micdoodle8.mods.galacticraft.core.items.ItemAxeGC;
+import micdoodle8.mods.galacticraft.core.items.ItemBase;
+import micdoodle8.mods.galacticraft.core.items.ItemBasic;
+import micdoodle8.mods.galacticraft.core.items.ItemBattery;
+import micdoodle8.mods.galacticraft.core.items.ItemBatteryInfinite;
+import micdoodle8.mods.galacticraft.core.items.ItemBuggy;
+import micdoodle8.mods.galacticraft.core.items.ItemBuggyMaterial;
+import micdoodle8.mods.galacticraft.core.items.ItemCanister;
+import micdoodle8.mods.galacticraft.core.items.ItemCanisterGeneric;
+import micdoodle8.mods.galacticraft.core.items.ItemCanisterOxygenInfinite;
+import micdoodle8.mods.galacticraft.core.items.ItemCheese;
+import micdoodle8.mods.galacticraft.core.items.ItemFlag;
+import micdoodle8.mods.galacticraft.core.items.ItemFuelCanister;
+import micdoodle8.mods.galacticraft.core.items.ItemHoeGC;
+import micdoodle8.mods.galacticraft.core.items.ItemKey;
+import micdoodle8.mods.galacticraft.core.items.ItemMeteorChunk;
+import micdoodle8.mods.galacticraft.core.items.ItemMeteoricIron;
+import micdoodle8.mods.galacticraft.core.items.ItemMoon;
+import micdoodle8.mods.galacticraft.core.items.ItemOilCanister;
+import micdoodle8.mods.galacticraft.core.items.ItemOxygenGear;
+import micdoodle8.mods.galacticraft.core.items.ItemOxygenMask;
+import micdoodle8.mods.galacticraft.core.items.ItemOxygenTank;
+import micdoodle8.mods.galacticraft.core.items.ItemParaChute;
+import micdoodle8.mods.galacticraft.core.items.ItemPickaxeGC;
+import micdoodle8.mods.galacticraft.core.items.ItemPreLaunchChecklist;
+import micdoodle8.mods.galacticraft.core.items.ItemRocketEngineGC;
+import micdoodle8.mods.galacticraft.core.items.ItemSchematic;
+import micdoodle8.mods.galacticraft.core.items.ItemSensorGlasses;
+import micdoodle8.mods.galacticraft.core.items.ItemSpadeGC;
+import micdoodle8.mods.galacticraft.core.items.ItemSwordGC;
+import micdoodle8.mods.galacticraft.core.items.ItemTier1Rocket;
+import micdoodle8.mods.galacticraft.core.items.ItemUniversalWrench;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryItem;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import micdoodle8.mods.galacticraft.core.util.StackSorted;
 import micdoodle8.mods.galacticraft.core.wrappers.PartialCanister;
+import net.minecraft.block.Block;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
 
 public class GCItems
 {
@@ -172,26 +208,26 @@ public class GCItems
      * until it services an FMLLoadCompleteEvent.
      * (Seriously?!)
      */
-    public static void hideItemsJEI(IItemBlacklist jeiHidden)
-    {
-        if (jeiHidden != null)
-        {
-            for (Item item : GCItems.hiddenItems)
-            {
-                jeiHidden.addItemToBlacklist(new ItemStack(item, 1, 0));
-            }
-
-            for (Block block : GCBlocks.hiddenBlocks)
-            {
-                jeiHidden.addItemToBlacklist(new ItemStack(block, 1, 0));
-                if (block == GCBlocks.slabGCDouble)
-                {
-                    for (int j = 1; j < (GalacticraftCore.isPlanetsLoaded ? 7 : 4); j++)
-                        jeiHidden.addItemToBlacklist(new ItemStack(block, 1, j));
-                }
-            }
-        }
-    }
+//    public static void hideItemsJEI(IItemBlacklist jeiHidden)
+//    {
+//        if (jeiHidden != null)
+//        {
+//            for (Item item : GCItems.hiddenItems)
+//            {
+//                jeiHidden.addItemToBlacklist(new ItemStack(item, 1, 0));
+//            }
+//
+//            for (Block block : GCBlocks.hiddenBlocks)
+//            {
+//                jeiHidden.addItemToBlacklist(new ItemStack(block, 1, 0));
+//                if (block == GCBlocks.slabGCDouble)
+//                {
+//                    for (int j = 1; j < (GalacticraftCore.isPlanetsLoaded ? 7 : 4); j++)
+//                        jeiHidden.addItemToBlacklist(new ItemStack(block, 1, j));
+//                }
+//            }
+//        }
+//    }
 
     public static void finalizeSort()
     {
@@ -219,7 +255,7 @@ public class GCItems
         {
             ISortableItem sortableItem = (ISortableItem) item;
             NonNullList<ItemStack> items = NonNullList.create();
-            item.getSubItems(item, null, items);
+            item.getSubItems(null, items);
             for (ItemStack stack : items)
             {
                 EnumSortCategoryItem categoryItem = sortableItem.getCategory(stack.getItemDamage());
@@ -290,15 +326,24 @@ public class GCItems
         GCItems.canisterTypes.add((ItemCanisterGeneric) GCItems.oilCanister);
     }
 
+    public static ArrayList<Item> items = new ArrayList<Item>();
+    
+    
     public static void registerItem(Item item)
     {
         String name = item.getUnlocalizedName().substring(5);
         GCCoreUtil.registerGalacticraftItem(name, item);
-        GameRegistry.register(item.setRegistryName(name));
+        items.add(item);
         GalacticraftCore.proxy.postRegisterItem(item);
         if (GCCoreUtil.getEffectiveSide() == Side.CLIENT)
         {
             GCItems.registerSorted(item);
         }
+    }
+
+    public static void registerItems(IForgeRegistry<Item> registry)
+    {
+        Item[] itemsArray = (Item[]) items.toArray();
+        registry.registerAll(itemsArray);
     }
 }

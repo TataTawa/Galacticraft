@@ -1,26 +1,26 @@
 package micdoodle8.mods.galacticraft.core.client;
 
+import java.util.Random;
+
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.client.FMLClientHandler;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import java.util.Random;
-
-public class SkyProviderOrbit extends IRenderHandler
-{
+public class SkyProviderOrbit extends IRenderHandler {
     private static final ResourceLocation moonTexture = new ResourceLocation("textures/environment/moon_phases.png");
     private static final ResourceLocation sunTexture = new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/planets/orbitalsun.png");
 
@@ -35,8 +35,7 @@ public class SkyProviderOrbit extends IRenderHandler
     private float prevPartialTicks = 0;
     private long prevTick;
 
-    public SkyProviderOrbit(ResourceLocation planet, boolean renderMoon, boolean renderSun)
-    {
+    public SkyProviderOrbit(ResourceLocation planet, boolean renderMoon, boolean renderSun) {
         this.planetToRender = planet;
         this.renderMoon = renderMoon;
         this.renderSun = renderSun;
@@ -46,17 +45,15 @@ public class SkyProviderOrbit extends IRenderHandler
         GL11.glEndList();
         GL11.glPopMatrix();
         final Tessellator tessellator = Tessellator.getInstance();
-        VertexBuffer worldRenderer = tessellator.getBuffer();
+        BufferBuilder worldRenderer = tessellator.getBuffer();
         this.glSkyList = this.starGLCallList + 1;
         GL11.glNewList(this.glSkyList, GL11.GL_COMPILE);
         final byte byte2 = 64;
         final int i = 256 / byte2 + 2;
         float f = 16F;
 
-        for (int j = -byte2 * i; j <= byte2 * i; j += byte2)
-        {
-            for (int l = -byte2 * i; l <= byte2 * i; l += byte2)
-            {
+        for (int j = -byte2 * i; j <= byte2 * i; j += byte2) {
+            for (int l = -byte2 * i; l <= byte2 * i; l += byte2) {
                 worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
                 worldRenderer.pos(j + 0, f, l + 0).endVertex();
                 worldRenderer.pos(j + byte2, f, l + 0).endVertex();
@@ -72,10 +69,8 @@ public class SkyProviderOrbit extends IRenderHandler
         f = -16F;
         worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
 
-        for (int k = -byte2 * i; k <= byte2 * i; k += byte2)
-        {
-            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2)
-            {
+        for (int k = -byte2 * i; k <= byte2 * i; k += byte2) {
+            for (int i1 = -byte2 * i; i1 <= byte2 * i; i1 += byte2) {
                 worldRenderer.pos(k + byte2, f, i1 + 0).endVertex();
                 worldRenderer.pos(k + 0, f, i1 + 0).endVertex();
                 worldRenderer.pos(k + 0, f, i1 + byte2).endVertex();
@@ -90,8 +85,7 @@ public class SkyProviderOrbit extends IRenderHandler
     private final Minecraft minecraft = FMLClientHandler.instance().getClient();
 
     @Override
-    public void render(float partialTicks, WorldClient world, Minecraft mc)
-    {
+    public void render(float partialTicks, WorldClient world, Minecraft mc) {
         final float var20 = 400.0F + (float) this.minecraft.player.posY / 2F;
 
         // if (this.minecraft.player.getRidingEntity() != null)
@@ -102,13 +96,12 @@ public class SkyProviderOrbit extends IRenderHandler
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         final Vec3d var2 = this.minecraft.world.getSkyColor(this.minecraft.getRenderViewEntity(), partialTicks);
-        float var3 = (float) var2.xCoord;
-        float var4 = (float) var2.yCoord;
-        float var5 = (float) var2.zCoord;
+        float var3 = (float) var2.x;
+        float var4 = (float) var2.y;
+        float var5 = (float) var2.z;
         float var8;
 
-        if (this.minecraft.gameSettings.anaglyph)
-        {
+        if (this.minecraft.gameSettings.anaglyph) {
             final float var6 = (var3 * 30.0F + var4 * 59.0F + var5 * 11.0F) / 100.0F;
             final float var7 = (var3 * 30.0F + var4 * 70.0F) / 100.0F;
             var8 = (var3 * 30.0F + var5 * 70.0F) / 100.0F;
@@ -134,8 +127,7 @@ public class SkyProviderOrbit extends IRenderHandler
         float var11;
         float var12;
 
-        if (var24 != null)
-        {
+        if (var24 != null) {
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             GL11.glShadeModel(GL11.GL_SMOOTH);
             GL11.glPushMatrix();
@@ -147,8 +139,7 @@ public class SkyProviderOrbit extends IRenderHandler
             var10 = var24[2];
             float var13;
 
-            if (this.minecraft.gameSettings.anaglyph)
-            {
+            if (this.minecraft.gameSettings.anaglyph) {
                 var11 = (var8 * 30.0F + var9 * 59.0F + var10 * 11.0F) / 100.0F;
                 var12 = (var8 * 30.0F + var9 * 70.0F) / 100.0F;
                 var13 = (var8 * 30.0F + var10 * 70.0F) / 100.0F;
@@ -157,13 +148,12 @@ public class SkyProviderOrbit extends IRenderHandler
                 var10 = var13;
             }
 
-            VertexBuffer worldRenderer = var23.getBuffer();
+            BufferBuilder worldRenderer = var23.getBuffer();
             worldRenderer.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_COLOR);
             worldRenderer.pos(0.0D, 100.0D, 0.0D).color(var8, var9, var10, var24[3]).endVertex();
             final byte var26 = 16;
 
-            for (int var27 = 0; var27 <= var26; ++var27)
-            {
+            for (int var27 = 0; var27 <= var26; ++var27) {
                 var13 = var27 * Constants.twoPI / var26;
                 final float var14 = MathHelper.sin(var13);
                 final float var15 = MathHelper.cos(var13);
@@ -185,26 +175,24 @@ public class SkyProviderOrbit extends IRenderHandler
         GL11.glTranslatef(var9, var10, var11);
         GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
 
-        //Code for rendering spinning spacestations
+        // Code for rendering spinning spacestations
         float deltaTick = partialTicks - this.prevPartialTicks;
-        //while (deltaTick < 0F) deltaTick += 1.0F;
+        // while (deltaTick < 0F) deltaTick += 1.0F;
         this.prevPartialTicks = partialTicks;
         long curTick = this.minecraft.world.getTotalWorldTime();
         int tickDiff = (int) (curTick - this.prevTick);
         this.prevTick = curTick;
-        if (tickDiff > 0 && tickDiff < 20)
-        {
+        if (tickDiff > 0 && tickDiff < 20) {
             deltaTick += tickDiff;
         }
         this.spinAngle = this.spinAngle - this.spinDeltaPerTick * deltaTick;
-        while (this.spinAngle < -180F)
-        {
+        while (this.spinAngle < -180F) {
             this.spinAngle += 360F;
         }
         GL11.glRotatef(this.spinAngle, 0.0F, 1.0F, 0.0F);
 
-        //At 0.8, these will look bright against a black sky - allows some headroom for them to
-        //look even brighter in outer dimensions (further from the sun)
+        // At 0.8, these will look bright against a black sky - allows some headroom for them to
+        // look even brighter in outer dimensions (further from the sun)
         GL11.glColor4f(0.8F, 0.8F, 0.8F, 0.8F);
         GL11.glCallList(this.starGLCallList);
 
@@ -213,13 +201,12 @@ public class SkyProviderOrbit extends IRenderHandler
         GL11.glPushMatrix();
         float celestialAngle = this.minecraft.world.getCelestialAngle(partialTicks);
         GL11.glRotatef(celestialAngle * 360.0F, 1.0F, 0.0F, 0.0F);
-        if (this.renderSun)
-        {
+        if (this.renderSun) {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
             var12 = 8.0F;
-            VertexBuffer worldRenderer = var23.getBuffer();
+            BufferBuilder worldRenderer = var23.getBuffer();
             worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
             worldRenderer.pos(-var12, 99.9D, -var12).endVertex();
             worldRenderer.pos(var12, 99.9D, -var12).endVertex();
@@ -239,13 +226,12 @@ public class SkyProviderOrbit extends IRenderHandler
             var23.draw();
         }
 
-        if (this.renderMoon)
-        {
+        if (this.renderMoon) {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.0F);
             var12 = 11.3F;
-            VertexBuffer worldRenderer = var23.getBuffer();
+            BufferBuilder worldRenderer = var23.getBuffer();
             worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
             worldRenderer.pos(-var12, -99.9D, var12).endVertex();
             worldRenderer.pos(var12, -99.9D, var12).endVertex();
@@ -275,8 +261,7 @@ public class SkyProviderOrbit extends IRenderHandler
         GL11.glPopMatrix();
         GL11.glDisable(GL11.GL_BLEND);
 
-        if (this.planetToRender != null)
-        {
+        if (this.planetToRender != null) {
             GL11.glPushMatrix();
             GL11.glTranslatef(0.0F, -var20 / 10, 0.0F);
             float scale = 100 * (0.3F - var20 / 10000.0F);
@@ -289,7 +274,7 @@ public class SkyProviderOrbit extends IRenderHandler
             var10 = 1.0F;
             final float alpha = 0.5F;
             GL11.glColor4f(Math.min(alpha, 1.0F), Math.min(alpha, 1.0F), Math.min(alpha, 1.0F), Math.min(alpha, 1.0F));
-            VertexBuffer worldRenderer = var23.getBuffer();
+            BufferBuilder worldRenderer = var23.getBuffer();
             worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
             worldRenderer.pos(-var10, 0, var10).tex(0.0F, 1.0F).endVertex();
             worldRenderer.pos(var10, 0, var10).tex(1.0F, 1.0F).endVertex();
@@ -307,62 +292,21 @@ public class SkyProviderOrbit extends IRenderHandler
 
         GL11.glColor3f(0.0F, 0.0F, 0.0F);
 
-        /* This all does nothing!
-        double var25 = 0.0D;
-
-        // if (this.minecraft.player.getRidingEntity() != null)
-        {
-            var25 = this.minecraft.player.posY - 64;
-
-            if (var25 < 0.0D)
-            {
-                // GL11.glPushMatrix();
-                // GL11.glTranslatef(0.0F, 12.0F, 0.0F);
-                // GL11.glCallList(this.glSkyList2);
-                // GL11.glPopMatrix();
-                // var10 = 1.0F;
-                // var11 = -((float)(var25 + 65.0D));
-                // var12 = -var10;
-                // var23.startDrawingQuads();
-                // var23.setColorRGBA_I(0, 255);
-                // var23.addVertex(-var10, var11, var10);
-                // var23.addVertex(var10, var11, var10);
-                // var23.addVertex(var10, var12, var10);
-                // var23.addVertex(-var10, var12, var10);
-                // var23.addVertex(-var10, var12, -var10);
-                // var23.addVertex(var10, var12, -var10);
-                // var23.addVertex(var10, var11, -var10);
-                // var23.addVertex(-var10, var11, -var10);
-                // var23.addVertex(var10, var12, -var10);
-                // var23.addVertex(var10, var12, var10);
-                // var23.addVertex(var10, var11, var10);
-                // var23.addVertex(var10, var11, -var10);
-                // var23.addVertex(-var10, var11, -var10);
-                // var23.addVertex(-var10, var11, var10);
-                // var23.addVertex(-var10, var12, var10);
-                // var23.addVertex(-var10, var12, -var10);
-                // var23.addVertex(-var10, var12, -var10);
-                // var23.addVertex(-var10, var12, var10);
-                // var23.addVertex(var10, var12, var10);
-                // var23.addVertex(var10, var12, -var10);
-                // var23.draw();
-            }
-        }
-
-        if (this.minecraft.world.provider.isSkyColored())
-        {
-            GL11.glColor3f(0.0f, 0.0f, 0.0f);
-        }
-        else
-        {
-            GL11.glColor3f(var3, var4, var5);
-        }
-        GL11.glColor3f(0.0f, 0.0f, 0.0f);
-
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0.0F, -((float) (var25 - 16.0D)), 0.0F);
-        GL11.glPopMatrix();
-        */
+        /*
+         * This all does nothing! double var25 = 0.0D;
+         * 
+         * // if (this.minecraft.player.getRidingEntity() != null) { var25 = this.minecraft.player.posY - 64;
+         * 
+         * if (var25 < 0.0D) { // GL11.glPushMatrix(); // GL11.glTranslatef(0.0F, 12.0F, 0.0F); // GL11.glCallList(this.glSkyList2); // GL11.glPopMatrix(); // var10 = 1.0F; // var11 = -((float)(var25 + 65.0D)); // var12 = -var10; //
+         * var23.startDrawingQuads(); // var23.setColorRGBA_I(0, 255); // var23.addVertex(-var10, var11, var10); // var23.addVertex(var10, var11, var10); // var23.addVertex(var10, var12, var10); // var23.addVertex(-var10, var12, var10); //
+         * var23.addVertex(-var10, var12, -var10); // var23.addVertex(var10, var12, -var10); // var23.addVertex(var10, var11, -var10); // var23.addVertex(-var10, var11, -var10); // var23.addVertex(var10, var12, -var10); // var23.addVertex(var10,
+         * var12, var10); // var23.addVertex(var10, var11, var10); // var23.addVertex(var10, var11, -var10); // var23.addVertex(-var10, var11, -var10); // var23.addVertex(-var10, var11, var10); // var23.addVertex(-var10, var12, var10); //
+         * var23.addVertex(-var10, var12, -var10); // var23.addVertex(-var10, var12, -var10); // var23.addVertex(-var10, var12, var10); // var23.addVertex(var10, var12, var10); // var23.addVertex(var10, var12, -var10); // var23.draw(); } }
+         * 
+         * if (this.minecraft.world.provider.isSkyColored()) { GL11.glColor3f(0.0f, 0.0f, 0.0f); } else { GL11.glColor3f(var3, var4, var5); } GL11.glColor3f(0.0f, 0.0f, 0.0f);
+         * 
+         * GL11.glPushMatrix(); GL11.glTranslatef(0.0F, -((float) (var25 - 16.0D)), 0.0F); GL11.glPopMatrix();
+         */
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         GL11.glDepthMask(true);
@@ -370,22 +314,19 @@ public class SkyProviderOrbit extends IRenderHandler
         GL11.glDisable(GL11.GL_BLEND);
     }
 
-    private void renderStars()
-    {
+    private void renderStars() {
         final Random var1 = new Random(10842L);
         final Tessellator var2 = Tessellator.getInstance();
         var2.getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
 
-        for (int var3 = 0; var3 < (ConfigManagerCore.moreStars ? 20000 : 6000); ++var3)
-        {
+        for (int var3 = 0; var3 < (ConfigManagerCore.moreStars ? 20000 : 6000); ++var3) {
             double var4 = var1.nextFloat() * 2.0F - 1.0F;
             double var6 = var1.nextFloat() * 2.0F - 1.0F;
             double var8 = var1.nextFloat() * 2.0F - 1.0F;
             final double var10 = 0.07F + var1.nextFloat() * 0.06F;
             double var12 = var4 * var4 + var6 * var6 + var8 * var8;
 
-            if (var12 < 1.0D && var12 > 0.01D)
-            {
+            if (var12 < 1.0D && var12 > 0.01D) {
                 var12 = 1.0D / Math.sqrt(var12);
                 var4 *= var12;
                 var6 *= var12;
@@ -403,8 +344,7 @@ public class SkyProviderOrbit extends IRenderHandler
                 final double var34 = Math.sin(var32);
                 final double var36 = Math.cos(var32);
 
-                for (int var38 = 0; var38 < 4; ++var38)
-                {
+                for (int var38 = 0; var38 < 4; ++var38) {
                     final double var39 = 0.0D;
                     final double var41 = ((var38 & 2) - 1) * var10;
                     final double var43 = ((var38 + 1 & 2) - 1) * var10;

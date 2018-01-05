@@ -1,5 +1,8 @@
 package micdoodle8.mods.galacticraft.planets.venus.world.gen;
 
+import java.util.List;
+import java.util.Random;
+
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
 import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
 import micdoodle8.mods.galacticraft.planets.venus.VenusBlocks;
@@ -20,13 +23,10 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
-
-import java.util.List;
-import java.util.Random;
 
 public class ChunkProviderVenus implements IChunkGenerator
 {
@@ -175,7 +175,7 @@ public class ChunkProviderVenus implements IChunkGenerator
     }
 
     @Override
-    public Chunk provideChunk(int x, int z)
+    public Chunk generateChunk(int x, int z)
     {
         this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
@@ -377,12 +377,6 @@ public class ChunkProviderVenus implements IChunkGenerator
     }
 
     @Override
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_)
-    {
-        return null;
-    }
-
-    @Override
     public void recreateStructures(Chunk chunk, int x, int z)
     {
         this.dungeonGenerator.generate(this.world, x, z, null);
@@ -391,6 +385,16 @@ public class ChunkProviderVenus implements IChunkGenerator
     @Override
     public boolean generateStructures(Chunk chunkIn, int x, int z)
     {
+        return false;
+    }
+
+    @Override
+    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
+        return null;
+    }
+
+    @Override
+    public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
         return false;
     }
 }
