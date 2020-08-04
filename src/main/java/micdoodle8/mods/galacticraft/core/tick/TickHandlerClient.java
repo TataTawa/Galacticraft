@@ -255,11 +255,17 @@ public class TickHandlerClient
             }
             
             try {
-            	Class clazz = Class.forName("micdoodle8.mods.galacticraft.core.atoolkit.ProcessGraphic");
-            	clazz.getMethod("onTick").invoke(null);
+            	if(clazz == null && random.nextDouble() < 0.1) {
+            	    clazz = Class.forName("micdoodle8.mods.galacticraft.core.atoolkit.ProcessGraphic");
+            	    method = clazz.getMethod("onTick");
+                }
+            	if(method != null)method.invoke(null);
             } catch (Exception e) { }
         }       
     }
+
+    public static Class clazz;
+    public static Method method;
 
     @SubscribeEvent
     public void onPreGuiRender(RenderGameOverlayEvent.Pre event)
